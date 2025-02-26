@@ -1,0 +1,71 @@
+<header>
+  <section>
+    <div class="mm">
+      <div class="mm-inn">
+        <div class="mm-logo">
+          <a href="/"><img style="width: 64px; height: 64px;" src="images/logo1.png" alt="" /></a>
+          <span style="color: white; font-weight: 800; font-size: 1.7rem;">&nbsp;Quizquiz</span>
+        </div>
+        <div class="mm-icon"><span><i class="fa fa-bars show-menu" aria-hidden="true"></i></span></div>
+        <div class="mm-menu">
+          <div class="mm-close"><span><i class="fa fa-times hide-menu" aria-hidden="true"></i></span></div>
+          <ul>
+            <!-- Already logged in -->
+            {{#if isLoggined}}
+            <li><a href="/">Welcome, {{username}}</a></li>
+            <!-- Admin menu -->
+            <li><a href="#">Do Quiz</a></li>
+            <li><a href="#">Score Management</a></li>
+            {{else}}
+            <!-- Not logged in -->
+            <li><a href="/register">Sign Up</a></li>
+            <li><a href="/login">Login</a></li>
+            {{/if}}
+
+            {{#if isLoggined}}
+            <!-- Logout -->
+            <li><a href="/logout">Logout</a></li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--HEADER SECTION-->
+  <section class="main">
+    <!--TOP SECTION-->
+    <div class="menu-section">
+      <div class="container">
+        <div class="row">
+          <div class="logo" style="width: 40%;">
+            <a href="/"><img style="width: 38px; height: 38px; margin: 10px;" src="images/logo1.png" alt="" /></a>
+            <span style="color: white; width: 100%; font-weight: 800; font-size: 1.7rem;">Quizquiz</span>
+          </div>
+          <div class="top-bar" style="width: 60%;">
+            <ul>
+              <!-- Already logged in -->
+              {{#if isLoggined}}
+              <li><a href="/">Welcome, {{username}}</a></li>
+              <!-- Admin menu -->
+              <li><a href="/quizAttempts">Quiz Attempts</a></li>
+              <li><a href="/getallquestions">Quiz Management</a></li>
+              <li><a href="/quiz">Take Quiz</a></li>
+
+              {{else}}
+              <!-- Not logged in -->
+              <li><a href="/register">Sign Up</a></li>
+              <li><a href="/login">Login</a></li>
+              {{/if}}
+
+              {{#if isLoggined}}
+              <!-- Logout -->
+              <li><a href="/logout">Logout</a></li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--TOP SECTION-->
+  </section>

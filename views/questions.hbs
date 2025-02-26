@@ -1,0 +1,210 @@
+<style>
+  h2 {
+    color: #333;
+    padding-top: 50px;
+  }
+
+  #searchInput {
+    padding: 10px;
+    width: 50%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  th,
+  td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  th {
+    background-color: #007bff;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  p {
+    font-size: 18px;
+    color: #666;
+  }
+</style>
+<main>
+  <div class="inn-body-section inn-booking">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="book-form inn-com-form">
+            <form id="addquestionform" class="col s12 bg-top-booking-form" action="/addquestion" method="POST"
+              onsubmit="return validateBookingForm()">
+              <div class="row" style="margin-top: 4%;">
+                <div class="page-head">
+                  <h2>Add Questions to Quizzes</h2>
+                  <br>
+                  <div class="head-title">
+                    <div class="hl-1"></div>
+                    <div class="hl-2"></div>
+                    <div class="hl-3"></div>
+                  </div>
+                  <h5>Making your favourite quiz!</h5>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col s12">
+                  <div class="col s12"><b>Choose Question Topic</b></div>
+                </div>
+                <div class="input-field col s12">
+                  <select name="quiztopic1" id="quiztopic1" class="form-control validate userinputcontrols">
+                    <option value="1" disabled selected>Please Select a Topic</option>
+                    <option value="1">Canada
+                    </option>
+                    <option value="2">News
+                    </option>
+                    <option value="3">Cyber Security
+                    </option>
+                    <option value="4">Movies
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="divider-top-booking-form row">
+                <div class="col s12">
+                  <div class="col s12"><b>Question Content</b></div>
+                </div>
+                <div class="input-field col s12">
+                  <input name="qcontent" id="qcontent" type="text" class="form-control validate userinputcontrols"
+                    required>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col s12">
+                  <div class="col s6"><b>Option 1</b></div>
+                  <div class="col s6"><b>&nbsp;&nbsp;Option 2</b></div>
+                </div>
+                <div class="input-field col s6">
+                  <input type="text" name="option1" id="option1" class="form-control validate userinputcontrols"
+                    required>
+                </div>
+                <div class="input-field col s6">
+                  <input type="text" name="option2" id="option2" class="form-control validate userinputcontrols"
+                    required>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col s12">
+                  <div class="col s6"><b>Option 3</b></div>
+                  <div class="col s6"><b>&nbsp;&nbsp;Option 4</b></div>
+                </div>
+                <div class="input-field col s6">
+                  <input type="text" name="option3" id="option3" class="form-control validate userinputcontrols"
+                    required>
+                </div>
+                <div class="input-field col s6">
+                  <input type="text" name="option4" id="option4" class="form-control validate userinputcontrols"
+                    required>
+                </div>
+              </div>
+              <br>
+              <hr>
+              <br>
+              <div class="row">
+                <div class="col s12">
+                  <div class="col s12"><b>Type a Correct Answer</b></div>
+                </div>
+                <div class="input-field col s12">
+                  <input name="qanswer" id="qanswer" type="text" class="form-control validate userinputcontrols"
+                    required>
+                </div>
+              </div>
+              <br>
+              <h4>Score level</h4>
+              <hr>
+              <div class="row">
+                <div class="col s12">
+                  <div class="col s12"><b>Score</b></div>
+                </div>
+                <div class="input-field col s12">
+                  <input type="number" name="qscore" id="qscore" class="form-control time-input" required>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col s12">
+                  <div class="col s12"><b>Image Url</b></div>
+                </div>
+                <div class="input-field col s12">
+                  <textarea name="qimages" id="qimages" class="userinputcontrols materialize-textarea"
+                    placeholder="One Image URL...." data-length="90"></textarea>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="submit" value="Add" class="userinputcontrols form-btn">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--END TYPOGRAPHY SECTION-->
+      </div>
+    </div>
+  </div>
+  <br>
+  {{#if allquestionsdata.length}}
+  <div style="width: 100%; overflow-x: scroll;">
+    <table id="quizquestionTable">
+      <thead>
+        <tr>
+          <th>Numbers</th>
+          <th>Question Contents</th>
+          <th>Option 1</th>
+          <th>Option 2</th>
+          <th>Option 3</th>
+          <th>Option 4</th>
+          <th>Answers</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each allquestionsdata}}
+        <tr>
+          <td>{{this.questionNumber}}</td>
+          <td>{{this.questionContent}}</td>
+          <td>{{this.option1}}</td>
+          <td>{{this.option2}}</td>
+          <td>{{this.option3}}</td>
+          <td>{{this.option4}}</td>
+          <td>{{this.answer}}</td>
+          <td>{{this.score}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  {{else}}
+  <p>No quiz attempts found.</p>
+  {{/if}}
+</main>

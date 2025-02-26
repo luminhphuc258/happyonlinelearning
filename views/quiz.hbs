@@ -1,0 +1,136 @@
+<style>
+  .questioncheckbox {
+    padding: 5px;
+    color: black;
+  }
+
+  .questioncheckbox:hover {
+    background-color: olivedrab;
+    cursor: pointer;
+    color: white;
+  }
+
+  .card {
+    margin-top: 8px !important;
+  }
+
+  .btnfixed {
+    font-size: 9px;
+    margin: 3px !important;
+  }
+
+  #txtviewgrades {
+    cursor: pointer;
+  }
+
+  #txtviewgrades:hover {
+    color: green !important;
+  }
+</style>
+<section>
+  <br>
+  <br>
+  <div class="card" id="menusetting" style="width: 100%; padding: 30px">
+    <div class="card-header">
+      <h3>User Settings</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="form-group">
+          <select name="quiztopic" id="quiztopic" class="form-control" required>
+            <option value="" disabled selected>Please Select Quiz Topic</option>
+            <option value="1">Canada</option>
+            <option value="2">News</option>
+          </select>
+        </div>
+        <br>
+        <div class="form-group">
+          <select name="btnnumberquestions" id="btnnumberquestions" class="form-control" required>
+            <option value="" disabled selected>How many questions do you want?</option>
+            <option value="5">Total 5 Questions</option>
+            <option value="7">Total 7 Questions</option>
+            <option value="10">Total 10 Questions</option>
+          </select>
+        </div>
+      </li>
+      <br>
+      </li>
+      <li class="list-group-item">
+        <button id="btnStartQuiz" type="button" class="btn btn-success btn-block">
+          Start Quiz
+        </button>
+      </li>
+    </ul>
+  </div>
+</section>
+<br />
+<section id="timerdashboard" style="
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        width: 190px;
+        background-color: white;
+        border: solid 1px black;
+        z-index: 3;
+      ">
+  <div id="timer" style="width: 100%; text-align: center">
+    Total time: 2 mintues
+  </div>
+  <div id="leftboard" style="padding: 5px"></div>
+</section>
+<section id="timerdashboard" style="position: fixed; bottom: 0px; left: 0px; width: 90px; z-index: 3">
+  <span class="material-icons" style="cursor: pointer" onclick="scrollToTop()">
+    rocket
+  </span>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <br>
+        <br>
+        <div id="questionsboard"></div>
+        <br />
+        <div id="containersubmitquiz" class="text-center" style="display: none;">
+          <button id="btnSubmitQuiz" type="button" class="btn btn-danger">
+            Submit the quiz
+          </button>
+        </div>
+        <br />
+        <div id="resultofquiz" class="alert alert-info text-center" role="alert" style="display: none;"></div>
+
+        <div id="restartarea" class="text-center" style="display: none;">
+          <button id="btnReserQuiz" type="button" class="btn btn-success">
+            Restart the quiz
+          </button>
+        </div>
+
+        <br />
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="confirmModalLabel">Confirmation Required</h4>
+      </div>
+      <div class="modal-body" style="font-size: 14px;">
+        Are you sure you want to submit this quiz?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelAction()">
+          No
+        </button>
+        <button type="button" class="btn btn-primary" onclick="confirmAction()">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

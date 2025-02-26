@@ -1,0 +1,99 @@
+<style>
+    h2 {
+        color: #333;
+        padding-top: 50px;
+    }
+
+    #searchInput {
+        padding: 10px;
+        width: 50%;
+        margin-bottom: 20px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    p {
+        font-size: 18px;
+        color: #666;
+    }
+</style>
+
+<center>
+    <div class="log-in-pop" style=" border-radius:10px;">
+        <h3>Quiz Attempts</h3>
+        <input style="width: 90%; font-weight:700;" type="text" id="searchInput" placeholder="Search by Username..."
+            onkeyup="searchByUsername()">
+    </div>
+</center>
+
+
+{{#if attempts.length}}
+<table id="quizTable">
+    <thead>
+        <tr>
+            <th>Attempt ID</th>
+            <th>Username</th>
+            <th>Score</th>
+            <th>Quiz ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each attempts}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.username}}</td>
+            <td>{{this.score}}</td>
+            <td>{{this.quizid}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>No quiz attempts found.</p>
+{{/if}}
+<script>
+    function searchByUsername() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let table = document.getElementById("quizTable");
+        let rows = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) {
+            let username = rows[i].getElementsByTagName("td")[1]?.textContent.toLowerCase();
+
+            if (username.includes(input)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>

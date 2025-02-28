@@ -30,8 +30,36 @@
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
             </svg>
-
           </li>
+          <!-- Already logged in -->
+          {{#if isLoggined}}
+          <!-- Admin menu -->
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='#' class="text-black block text-[15px] font-medium">User management</a>
+          </li>
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='#' class="text-black block text-[15px] font-medium">Instructor management</a>
+          </li>
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='#' class="text-black block text-[15px] font-medium">Student management</a>
+          </li>
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='#' class="text-black block text-[15px] font-medium">Course management</a>
+          </li>
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='#' class="text-black block text-[15px] font-medium">Quiz management</a>
+          </li>
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='#' class="text-black block text-[15px] font-medium">Assessment management</a>
+          </li>
+          {{else}}
+          <!-- Not logged in -->
           <li
             class="max-lg:border-b max-lg:py-3 relative lg:after:absolute lg:after:bg-[#3498db] lg:after:w-full lg:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
             <a href='/login' class="text-black block text-[15px] font-medium">Login</a>
@@ -40,23 +68,63 @@
             class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
             <a href='/register' class="text-black block text-[15px] font-medium">Register</a>
           </li>
-
+          {{/if}}
         </ul>
       </div>
-
+      {{!-- start icons right --}}
+      {{#if isLoggined}}
       <div class="flex items-center max-sm:ml-auto">
         <ul class="flex space-x-4">
+          {{!-- logout section --}}
           <li
             class="relative px-1 lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"
-              class="cursor-pointer fill-black" class="size-6">
-              <path fill-rule="evenodd"
-                d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                clip-rule="evenodd" />
-            </svg>
-
-
+            {{#if isLoggined}}
+            {{!-- profile area --}}
+            <span class="relative">
+              Welcome ,{{username}}
+            </span>
+            {{!-- end profile --}}
+            {{/if}}
           </li>
+          <div class="flex items-center ml-auto">
+            <ul class="flex space-x-4">
+              <li id="profile-dropdown-toggle"
+                class="relative px-1 after:absolute  after:w-full  after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
+                <div class="flex flex-col justify-center items-center cursor-pointer">
+                  <svg id="icon_profile" name="icon_profile" xmlns="http://www.w3.org/2000/svg" width="18px"
+                    height="18px" viewBox="0 0 512 512">
+                    <path
+                      d="M337.711 241.3a16 16 0 0 0-11.461 3.988c-18.739 16.561-43.688 25.682-70.25 25.682s-51.511-9.121-70.25-25.683a16.007 16.007 0 0 0-11.461-3.988c-78.926 4.274-140.752 63.672-140.752 135.224v107.152C33.537 499.293 46.9 512 63.332 512h385.336c16.429 0 29.8-12.707 29.8-28.325V376.523c-.005-71.552-61.831-130.95-140.757-135.223zM446.463 480H65.537V376.523c0-52.739 45.359-96.888 104.351-102.8C193.75 292.63 224.055 302.97 256 302.97s62.25-10.34 86.112-29.245c58.992 5.91 104.351 50.059 104.351 102.8zM256 234.375a117.188 117.188 0 1 0-117.188-117.187A117.32 117.32 0 0 0 256 234.375zM256 32a85.188 85.188 0 1 1-85.188 85.188A85.284 85.284 0 0 1 256 32z"
+                      data-original="#000000" />
+                  </svg>
+                </div>
+                <div id="profile-dropdown-menu" style="display: none;"
+                  class="bg-white block z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] max-sm:-right-32 absolute right-0 top-14">
+                  <div class="flex flex-wrap items-center justify-center flex-col cursor-pointer">
+                    <img src='{{useravatar}}' class="w-32 h-32 rounded-full" />
+                    <h4 class="text-base text-gray-800 font-bold mt-3">{{fullName}}</h4>
+                    <p class="text-xs text-gray-500 mt-1">{{email}}</p>
+                  </div>
+                  <hr class="border-b-0 my-4" />
+                  <button type='button' id="btnlogout"
+                    class="bg-transparent border border-gray-300 hover:border-pink-500 px-4 py-2 mt-4 text-sm text-blue-500 font-semibold">Logout
+                  </button>
+                </div>
+              </li>
+            </ul>
+
+            <button id="toggleOpen" class="lg:hidden ml-6">
+              <svg class="w-8 h-8" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+
+          {{!-- end logout --}}
+
+
           <li
             class="relative px-1 lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
             <span class="relative">
@@ -79,5 +147,7 @@
           </svg>
         </button>
       </div>
+      {{/if}}
+      {{!-- end icons --}}
     </div>
   </header>

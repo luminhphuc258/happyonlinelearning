@@ -1,30 +1,18 @@
-const admin = require('firebase-admin');
-const path = require('path');
+import admin from "firebase-admin";
+import { readFile } from "fs/promises";
+import { getStorage } from "firebase-admin/storage";
 
+// Load Firebase Service Account JSON asynchronously
+const serviceAccount = JSON.parse(
+  await readFile(new URL("../happyonlinelearning-firebase-adminsdk-fbsvc-627f7470e8.json", import.meta.url))
+);
+
+// Initialize Firebase Admin
 admin.initializeApp({
-  credential: admin.credential.cert(require('../happyonlinelearning-firebase-adminsdk-fbsvc-627f7470e8.json')),
-  storageBucket: 'happyonlinelearning.appspot.com',
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "happyonlinelearning.firebasestorage.app",
 });
 
-const bucket = admin.storage().bucket();
+const bucket = getStorage().bucket();
+export default bucket;
 
-async function uploadAvatar(localFilePath, userName) {
-  const destination = `usersavatar/${userName}-${Date.now()}.png`;
-
-  try {
-    const [uploadedFile] = await bucket.upload(localFilePath, {
-      destination,
-      public: true,
-    });
-
-    //gs://happyonlinelearning.firebasestorage.app/usersavatar
-    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${uploadedFile.name}`;
-    console.log(`Uploaded to: ${publicUrl}`);
-    return publicUrl;
-  } catch (err) {
-    console.error('Upload failed:', err);
-  }
-}
-
-// Example usage:
-//uploadAvatar(path.join(__dirname, 'avatar.png'), 'john_doe');

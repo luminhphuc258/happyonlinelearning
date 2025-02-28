@@ -14,3 +14,16 @@ toggleClose.addEventListener('click', () => {
   collapseMenu.classList.remove('max-lg:flex');
   collapseMenu.classList.add('max-lg:hidden');
 });
+
+
+$(document).ready(function () {
+  $("#icon_profile").click(function () {
+    $('#profile-dropdown-menu').toggle();
+  });
+
+  //catch event for user logout 
+  $("#btnlogout").click(function () {
+    window.location.href = "/logout";
+  })
+
+});

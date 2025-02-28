@@ -6,17 +6,17 @@ const router = express.Router();
 //One to render the form where users can input their details
 router.get('/', (req, res) => {
   if (req.session.isLoggined) {
-    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role });
+    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
   } else {
-    res.render('login', { username: '', isLoggined: false, userRole: '' });
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
   }
 });
 
 router.get('/login', (req, res) => {
   if (req.session.isLoggined) {
-    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role });
+    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
   } else {
-    res.render('login', { username: '', isLoggined: false, userRole: '' });
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
   }
 });
 

@@ -1,42 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const formlogin = document.getElementById("loginForm");
-  if (formlogin) {
-    document.getElementById('loginForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const url = "http://localhost:3000/login";
-
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Login failed with status ' + response.status);
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log(data);
-          localStorage.setItem("token", data.token);
-          alert('Login Successfully!');
-          window.location.reload();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Unauthorized!');
-        });
-    });
-  }
-});
-
 // FUNCTIONS ZONE
 function show_toast_success() {
   $("#toast_wrapper").fadeIn(1000).delay(2000).slideUp(1000);
@@ -60,25 +21,29 @@ function togglePassword() {
 }
 /* login  */
 function RequestToLogin() {
-  var loginUrl = "${pageContext.request.contextPath}/requestLogin";
-  var usernameInput = $("#username").val();
-  var passwordInput = $("#password").val();
+  var loginUrl = "http://localhost:3000/login";
+  var username = $("#username").val();
+  var password = $("#password").val();
+
   fetch(loginUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json",
     },
-    body: new URLSearchParams({ username: usernameInput, password: passwordInput })
+    body: JSON.stringify({
+      username,
+      password
+    })
   })
     .then(res => {
       return res.json();
     })
     .then(data => {
-      if (data === true) {
+      if (data.status === "success") {
         show_toast_success();
         setTimeout(() => {
-          window.location.href = "${pageContext.request.contextPath}/"
-        }, 2500);
+          window.location.href = "http://localhost:3000/"
+        }, 2000);
 
       } else {
         show_toast_error();
@@ -89,4 +54,13 @@ function RequestToLogin() {
       show_toast_error();
     });
 }
+
+$(document).ready(function () {
+  $('#password').on('keydown', function (event) {
+    if (event.key === 'Enter') {
+      console.log('Enter key was pressed.');
+      RequestToLogin();
+    }
+  });
+})
 

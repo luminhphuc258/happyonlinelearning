@@ -22,7 +22,7 @@ export const checkUserRoleBeforeLogin = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid username or password." });
     } else {
       // Compare hashed password with input
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password_hash);
 
       if (!isMatch) {
         return res.status(401).json({ message: "Invalid username or password." });
@@ -30,9 +30,14 @@ export const checkUserRoleBeforeLogin = async (req, res, next) => {
     }
 
     console.log("info user from db");
+    const userid = user.dataValues.user_id;
     const Username = user.dataValues.username;
-    const usrRole = user.dataValues.role;
+    const usrRole = 'teacher';
     const UserId = user.dataValues.id;
+    const fullname = user.dataValues.last_name + " " + user.dataValues.first_name;
+    const picture = user.dataValues.avatar;
+    const email = user.dataValues.email;
+    console.log("user id:" + userid);
     // Generate JWT token
     const token = jwt.sign(
       { id: UserId, username: Username, role: usrRole }, process.env.JWT_SECRET || '****', { expiresIn: '1h' }
@@ -44,6 +49,9 @@ export const checkUserRoleBeforeLogin = async (req, res, next) => {
     req.session.username = Username;
     req.session.role = usrRole;
     req.session.token = token;
+    req.session.picture = picture;
+    req.session.email = email;
+    req.session.fullname = fullname;
     req.session.isLoggined = true;
     console.log("User authenticated:");
     next();

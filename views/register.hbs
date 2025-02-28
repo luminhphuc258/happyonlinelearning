@@ -1,54 +1,166 @@
 <!-- Start main body -->
 <main>
-  <div class="font-[sans-serif]">
+  <div>
     <div class="mt-5 mb-6 px-4">
       <div class="mx-auto max-w-6xl shadow-lg p-8 relative bg-white rounded">
+        <!-- stepper area -->
+        <div class="flex items-end max-w-screen-lg mx-auto">
+          <div class="w-full">
+            <h6 class="text-sm font-bold text-blue-500 mb-2 mr-4">Step 1 - Enter information</h6>
+            <div class="flex items-center w-full">
+              <div
+                class="w-7 h-7 z-50 shrink-0 mx-[-1px] border-2 border-blue-500 flex items-center justify-center rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-blue-500" viewBox="0 0 24 24">
+                  <path
+                    d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"
+                    data-original="#000000" />
+                </svg>
+              </div>
+              <div class="w-full h-[3px] bg-blue-500"></div>
+            </div>
+          </div>
+          <div class="w-full">
+            <h6 class="text-sm font-bold text-blue-500 mb-2 mr-4">Step 2 - OTP Verification</h6>
+            <div class="flex items-center w-full">
+              <div
+                class="w-7 h-7 z-50 shrink-0 mx-[-1px] border-2 border-blue-500 flex items-center justify-center rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-blue-500" viewBox="0 0 24 24">
+                  <path
+                    d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"
+                    data-original="#000000" />
+                </svg>
+              </div>
+              <div class="w-full h-[3px] bg-blue-500"></div>
+            </div>
+          </div>
+          <div>
+            <h6 class="text-sm font-bold text-blue-500 w-max mb-2">Completed</h6>
+            <div class="flex items-center w-full">
+              <div
+                class="w-7 h-7 z-50 shrink-0 mx-[-1px] border-2 border-blue-500 flex items-center justify-center rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-blue-500" viewBox="0 0 24 24">
+                  <path
+                    d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"
+                    data-original="#000000" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <!-- stepper area -->
         <h2 class="text-xl text-gray-800 font-bold">Create New Account</h2>
 
         <form class="mt-8 grid sm:grid-cols-2 gap-6">
+          <input type="hidden" id="pictureurl" name="pictureurl">
           <div>
-            <label class="text-gray-800 text-sm block mb-2">Your Name</label>
-            <input type='text' placeholder='Enter Name'
-              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none" />
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Given Name</label>
+            <input type='text' id="givenname" name="givenname" placeholder='Enter Given Name'
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
           </div>
           <div>
-            <label class="text-gray-800 text-sm block mb-2">Your Email</label>
-            <input type='email' placeholder='Email'
-              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none" />
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Last Name</label>
+            <input type='text' placeholder='Enter Last Name' id="lastname" name="lastname"
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
           </div>
           <div>
-            <label class="text-gray-800 text-sm block mb-2">Your Number</label>
-            <input type='email' placeholder='Phone No.'
-              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none" />
+            <label class="text-gray-800 text-sm block mb-2 font-bold">UserName</label>
+            <input type='text' id="username" name="username" placeholder='Enter UserName'
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
           </div>
           <div>
-            <label class="text-gray-800 text-sm block mb-2">Website</label>
-            <input type='text' placeholder='Website'
-              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none" />
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Email</label>
+            <input type='email' placeholder='Email' id="email" name="email"
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
           </div>
           <div>
-            <label class="text-gray-800 text-sm block mb-2">Company</label>
-            <input type='text' placeholder='Company'
-              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none" />
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Password</label>
+            <input type='password' id="password" name="password" placeholder='Enter Password'
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
           </div>
           <div>
-            <label class="text-gray-800 text-sm block mb-2">Subject</label>
-            <input type='text' placeholder='Subject'
-              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none" />
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Confirmed Password</label>
+            <input type='password' placeholder='Enter Confirmed Password' id="repassword" name="repassword"
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Your Number</label>
+            <input type='number' placeholder='Enter Phone No.' id="phone" name="phone"
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Address</label>
+            <input type='text' placeholder='Enter Address' id="address" name="address"
+              class="w-full rounded py-2.5 px-4 border border-gray-300 text-sm focus:border-blue-600 outline-none"
+              required />
           </div>
           <div class="col-span-full">
-            <label class="text-gray-800 text-sm block mb-2">Message</label>
-            <textarea placeholder='Message' rows="6"
-              class="w-full rounded px-4 border border-gray-300 text-sm pt-3 focus:border-blue-600 outline-none"></textarea>
-          </div>
-          <div class="flex items-center col-span-full">
-            <input id="checkbox1" type="checkbox" class="w-4 h-4 mr-3 shrink-0" />
-            <label for="checkbox1" class="text-sm text-gray-500">I agree to the <a href="javascript:void(0);"
-                class="underline">Terms and Conditions</a> and <a href="javascript:void(0);" class="underline">Privacy
-                Policy</a></label>
-          </div>
+            <label class="text-gray-800 text-sm block mb-2 font-bold">Upload your Avatar</label>
+            <div class="grid sm:grid-cols-2 gap-12 max-w-3xl mx-auto p-4">
 
-          <button type='button'
+              <div for="uploadFile1"
+                class="bg-gray-50 text-center px-4 rounded w-full h-80 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-400 border-dashed font-[sans-serif]">
+                <div class="py-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-10 mb-2 fill-gray-600 inline-block"
+                    viewBox="0 0 32 32">
+                    <path
+                      d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                      data-original="#000000" />
+                    <path
+                      d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                      data-original="#000000" />
+                  </svg>
+                  <h4 class="text-base font-semibold text-gray-600">Drag and drop files here</h4>
+                </div>
+
+                <hr class="w-full border-gray-400 my-2" />
+
+                <div class="py-6">
+                  <input type="file" id='uploadFile1' class="hidden" />
+                  <label for="uploadFile1"
+                    class="block px-6 py-2.5 rounded text-gray-600 text-sm tracking-wider cursor-pointer font-semibold border-none outline-none bg-gray-200 hover:bg-gray-100">Browse
+                    Files</label>
+                  <p class="text-xs text-gray-400 mt-4">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
+                </div>
+              </div>
+
+              <div id="uploaded_result" style="display:none;">
+                <h4 class="text-base text-gray-600 font-semibold">Uploading</h4>
+                <div class="space-y-8 mt-4">
+                  <div class="flex flex-col">
+                    <div class="flex mb-2">
+                      <p id="displayfilename" class="text-sm text-gray-500 font-semibold flex-1"></span>
+                      </p>
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-3 cursor-pointer shrink-0 fill-black hover:fill-red-500" viewBox="0 0 320.591 320.591">
+                        <path
+                          d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                          data-original="#000000"></path>
+                        <path
+                          d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                          data-original="#000000"></path>
+                      </svg>
+                    </div>
+                    <div class="bg-gray-300 rounded-full w-full h-2.5">
+                      <div class="w-12/12 h-full rounded-full bg-blue-600 flex items-center relative">
+                        <span class="absolute text-xs right-0.5 bg-white w-2 h-2 rounded-full"></span>
+                      </div>
+                    </div>
+                    <p class="text-sm text-gray-500 font-semibold flex-1 mt-2">100% done <span
+                        id="uploadmessage"></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" id="createnewaccount" name="createnewaccount"
             class="text-white w-max bg-[#007bff] hover:bg-blue-600 tracking-wide rounded text-sm px-4 py-2.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill='#fff' class="mr-2 inline"
               viewBox="0 0 548.244 548.244">
@@ -56,10 +168,115 @@
                 d="M392.19 156.054 211.268 281.667 22.032 218.58C8.823 214.168-.076 201.775 0 187.852c.077-13.923 9.078-26.24 22.338-30.498L506.15 1.549c11.5-3.697 24.123-.663 32.666 7.88 8.542 8.543 11.577 21.165 7.879 32.666L390.89 525.906c-4.258 13.26-16.575 22.261-30.498 22.338-13.923.076-26.316-8.823-30.728-22.032l-63.393-190.153z"
                 clip-rule="evenodd" data-original="#000000" />
             </svg>
-            Send Message
+            Submit
           </button>
         </form>
+        <br>
+
+        {{!-- start notification components for showing error messages --}}
+        <div id="validnotifcation" name="validnotifcation" style="display: none;"
+          class="bg-red-50 text-red-800 p-6 rounded-lg relative" role="alert">
+          <div class="mb-3 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] cursor-pointer fill-red-500 inline mr-3 shrink-0"
+              viewBox="0 0 32 32">
+              <path
+                d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
+                data-original="#ea2d3f" />
+            </svg>
+            <strong class="font-bold text-sm mr-3">Error Message!</strong>
+          </div>
+          <span id="validnotifcation_messagecontent" name="validnotifcation_messagecontent"
+            class="block sm:inline text-sm"></span>
+
+          <svg id="btnclosemessagevalid" xmlns="http://www.w3.org/2000/svg"
+            class="w-3 cursor-pointer fill-red-500 absolute right-4 top-4" viewBox="0 0 320.591 320.591">
+            <path
+              d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+              data-original="#000000" />
+            <path
+              d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+              data-original="#000000" />
+          </svg>
+        </div>
+        {{!-- end notification components for showing error messages --}}
       </div>
     </div>
   </div>
+  <!-- Toast messages area -->
+
+  <!-- toast success -->
+  <div id="toast_wrapper" style="display: none;"
+    class="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+    <div id="toast_success"
+      class="w-[310px] bg-white text-center shadow-lg border-l-4 border-green-500 text-gray-800 flex items-center p-4 rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" class="spinner-6 w-10 h-10 shrink-0 animate-spin"
+        viewBox="0 0 512.004 512.004">
+        <path
+          d="M256.002 93.869c-89.404 0-162.133 72.73-162.133 162.133s72.73 162.133 162.133 162.133 162.133-72.73 162.133-162.133S345.406 93.869 256.002 93.869zm0 307.2c-79.991 0-145.067-65.075-145.067-145.067s65.075-145.067 145.067-145.067 145.067 65.075 145.067 145.067-65.075 145.067-145.067 145.067z"
+          data-original="#000000" />
+        <path
+          d="M256.002 204.802c-28.237 0-51.2 22.963-51.2 51.2s22.963 51.2 51.2 51.2 51.2-22.963 51.2-51.2-22.963-51.2-51.2-51.2zm0 85.333c-18.825 0-34.133-15.309-34.133-34.133s15.309-34.133 34.133-34.133c18.825 0 34.133 15.309 34.133 34.133s-15.308 34.133-34.133 34.133zm0 179.201c-110.309 0-201.332-84.157-212.237-191.638l9.938 9.938c1.664 1.664 3.849 2.5 6.033 2.5s4.369-.836 6.033-2.5a8.525 8.525 0 0 0 0-12.066l-25.6-25.6a8.813 8.813 0 0 0-.625-.566c-.107-.088-.22-.165-.33-.247-.112-.083-.221-.171-.338-.248-.137-.092-.28-.173-.421-.256-.097-.057-.191-.118-.291-.172-.152-.081-.307-.151-.463-.223-.096-.045-.19-.093-.289-.134-.162-.067-.327-.123-.492-.18-.097-.034-.193-.072-.292-.102a8.602 8.602 0 0 0-.547-.141c-.087-.02-.172-.046-.26-.064a8.26 8.26 0 0 0-.714-.109c-.037-.004-.073-.012-.11-.016a8.592 8.592 0 0 0-1.727 0c-.037.004-.073.012-.11.016a8.602 8.602 0 0 0-.714.109c-.088.018-.173.043-.26.064-.183.043-.366.086-.546.141-.099.03-.195.069-.292.102-.165.057-.33.113-.492.18-.098.041-.191.089-.287.134-.156.072-.312.142-.464.224-.1.053-.194.115-.291.172-.141.083-.283.164-.421.256-.116.077-.224.164-.336.247-.111.083-.224.16-.332.249a8.346 8.346 0 0 0-.624.565l-25.6 25.6a8.525 8.525 0 0 0 0 12.066 8.523 8.523 0 0 0 12.066 0l11.889-11.889C36.507 393.581 135.61 486.402 256.002 486.402c4.71 0 8.533-3.823 8.533-8.533s-3.822-8.533-8.533-8.533zm253.5-244.967a8.523 8.523 0 0 0-12.066 0l-11.889 11.889C475.498 118.423 376.395 25.602 256.002 25.602a8.536 8.536 0 0 0-8.533 8.533 8.536 8.536 0 0 0 8.533 8.533c110.309 0 201.332 84.157 212.237 191.638l-9.938-9.938a8.523 8.523 0 0 0-12.066 0 8.523 8.523 0 0 0 0 12.066l25.6 25.6c.199.199.408.387.625.565.096.079.198.148.297.222.124.093.246.189.375.276.116.078.238.145.357.217.12.072.237.147.36.213.121.065.246.119.369.178.129.061.255.125.388.18.12.05.242.089.364.133.141.051.28.105.424.149.121.037.245.063.367.094.147.037.292.078.442.108.144.029.289.045.434.066.13.019.259.044.391.057a8.442 8.442 0 0 0 1.682 0c.132-.013.261-.038.391-.057.144-.021.289-.038.433-.066.15-.03.296-.071.443-.108.122-.031.245-.057.366-.094.144-.044.284-.098.425-.149.121-.044.244-.084.363-.133.132-.055.259-.119.388-.18.123-.059.248-.113.369-.178.123-.066.24-.141.36-.213.119-.072.24-.139.357-.217.129-.086.251-.182.375-.276.099-.074.2-.143.297-.222.217-.178.427-.367.625-.565l25.6-25.6a8.523 8.523 0 0 0 0-12.065z"
+          data-original="#000000" />
+      </svg>
+      &nbsp;&nbsp;
+      <span class="text-center font-semibold tracking-wide">Register successfully</span>
+      &nbsp;&nbsp;
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] mr-3 fill-green-500" viewBox="0 0 512 512">
+        <ellipse cx="246" cy="246" rx="246" ry="246" />
+        <path class="fill-white"
+          d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Toast error -->
+  <div id="toast_wrapper_error" style="display: none;"
+    class="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+    <div
+      class="w-[310px] bg-white text-center shadow-lg border-l-4 border-red-500 text-gray-800 flex items-center p-4 rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" class="spinner-6 w-10 h-10 shrink-0 animate-spin"
+        viewBox="0 0 512.004 512.004">
+        <path
+          d="M256.002 93.869c-89.404 0-162.133 72.73-162.133 162.133s72.73 162.133 162.133 162.133 162.133-72.73 162.133-162.133S345.406 93.869 256.002 93.869zm0 307.2c-79.991 0-145.067-65.075-145.067-145.067s65.075-145.067 145.067-145.067 145.067 65.075 145.067 145.067-65.075 145.067-145.067 145.067z"
+          data-original="#000000" />
+        <path
+          d="M256.002 204.802c-28.237 0-51.2 22.963-51.2 51.2s22.963 51.2 51.2 51.2 51.2-22.963 51.2-51.2-22.963-51.2-51.2-51.2zm0 85.333c-18.825 0-34.133-15.309-34.133-34.133s15.309-34.133 34.133-34.133c18.825 0 34.133 15.309 34.133 34.133s-15.308 34.133-34.133 34.133zm0 179.201c-110.309 0-201.332-84.157-212.237-191.638l9.938 9.938c1.664 1.664 3.849 2.5 6.033 2.5s4.369-.836 6.033-2.5a8.525 8.525 0 0 0 0-12.066l-25.6-25.6a8.813 8.813 0 0 0-.625-.566c-.107-.088-.22-.165-.33-.247-.112-.083-.221-.171-.338-.248-.137-.092-.28-.173-.421-.256-.097-.057-.191-.118-.291-.172-.152-.081-.307-.151-.463-.223-.096-.045-.19-.093-.289-.134-.162-.067-.327-.123-.492-.18-.097-.034-.193-.072-.292-.102a8.602 8.602 0 0 0-.547-.141c-.087-.02-.172-.046-.26-.064a8.26 8.26 0 0 0-.714-.109c-.037-.004-.073-.012-.11-.016a8.592 8.592 0 0 0-1.727 0c-.037.004-.073.012-.11.016a8.602 8.602 0 0 0-.714.109c-.088.018-.173.043-.26.064-.183.043-.366.086-.546.141-.099.03-.195.069-.292.102-.165.057-.33.113-.492.18-.098.041-.191.089-.287.134-.156.072-.312.142-.464.224-.1.053-.194.115-.291.172-.141.083-.283.164-.421.256-.116.077-.224.164-.336.247-.111.083-.224.16-.332.249a8.346 8.346 0 0 0-.624.565l-25.6 25.6a8.525 8.525 0 0 0 0 12.066 8.523 8.523 0 0 0 12.066 0l11.889-11.889C36.507 393.581 135.61 486.402 256.002 486.402c4.71 0 8.533-3.823 8.533-8.533s-3.822-8.533-8.533-8.533zm253.5-244.967a8.523 8.523 0 0 0-12.066 0l-11.889 11.889C475.498 118.423 376.395 25.602 256.002 25.602a8.536 8.536 0 0 0-8.533 8.533 8.536 8.536 0 0 0 8.533 8.533c110.309 0 201.332 84.157 212.237 191.638l-9.938-9.938a8.523 8.523 0 0 0-12.066 0 8.523 8.523 0 0 0 0 12.066l25.6 25.6c.199.199.408.387.625.565.096.079.198.148.297.222.124.093.246.189.375.276.116.078.238.145.357.217.12.072.237.147.36.213.121.065.246.119.369.178.129.061.255.125.388.18.12.05.242.089.364.133.141.051.28.105.424.149.121.037.245.063.367.094.147.037.292.078.442.108.144.029.289.045.434.066.13.019.259.044.391.057a8.442 8.442 0 0 0 1.682 0c.132-.013.261-.038.391-.057.144-.021.289-.038.433-.066.15-.03.296-.071.443-.108.122-.031.245-.057.366-.094.144-.044.284-.098.425-.149.121-.044.244-.084.363-.133.132-.055.259-.119.388-.18.123-.059.248-.113.369-.178.123-.066.24-.141.36-.213.119-.072.24-.139.357-.217.129-.086.251-.182.375-.276.099-.074.2-.143.297-.222.217-.178.427-.367.625-.565l25.6-25.6a8.523 8.523 0 0 0 0-12.065z"
+          data-original="#000000" />
+      </svg>
+      &nbsp;&nbsp;
+      <span class="text-center font-semibold tracking-wide">Failure to register for this user!</span>
+      &nbsp;&nbsp;
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] shrink-0 fill-red-500 inline mr-3" viewBox="0 0 32 32">
+        <path
+          d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
+          data-original="#ea2d3f" />
+      </svg>
+    </div>
+  </div>
+  <!-- end toasts -->
+  {{!-- modal to enter OTP code --}}
+  <div style="display: none;" id="modal_OTP"
+    class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+    <div class="w-full max-w-lg bg-white shadow-lg rounded-md p-8 relative">
+      <svg xmlns="http://www.w3.org/2000/svg"
+        class="w-3.5 cursor-pointer shrink-0 fill-gray-800 hover:fill-red-500 float-right"
+        viewBox="0 0 320.591 320.591">
+        <path
+          d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+          data-original="#000000"></path>
+        <path
+          d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+          data-original="#000000"></path>
+      </svg>
+      <div class="my-8 text-center">
+        <h4 class="text-2xl text-gray-800 font-bold">Enter your OTP Code for Verification</h4>
+        <input id="userinputOTP" type="text" placeholder="Enter a OTP code"
+          class="px-4 py-2.5 mt-6 bg-[#f0f1f2] text-gray-800 w-full text-sm focus:bg-transparent outline-blue-600 rounded-md" />
+      </div>
+      <button type="button" id="btn_validOTP"
+        class="px-5 py-2.5 w-full rounded-md text-white text-sm outline-none bg-blue-600 hover:bg-blue-700">Confirm</button>
+    </div>
+  </div>
+  {{!-- end modal --}}
 </main>
+<script src="/js/register.js"></script>

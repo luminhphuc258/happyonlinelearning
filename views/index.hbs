@@ -1,23 +1,142 @@
-<main class="main">
-  <div class="hom-body-section">
-    <div class="container">
-      <div class="row">
-        <div class="home-bod">
-          <div class="home-bod-1">
-            <h4>Today up to <span style="color: yellow;">50%</span> offer</h4>
-            <h2>Enjoy your Quiz</h2>
-            <p>Scratch to reveal exclusive offers</p>
-            <p>Quiz Online</p>
-            <div>
-              <center>
-                <a href="/quiz" class="waves-effect waves-light btn-large wed-pop-ser-btn"><i
-                    class="fa fa-hand-pointer-o" aria-hidden="true"></i>&nbsp;Take Quiz Now</a>&nbsp;&nbsp;
-              </center>
+<!-- Start main body -->
+<main>
+  {{!-- caroulsel --}}
+  <div class="p-4 font-[sans-serif] bg-blue-100">
+    <div class="mx-auto relative">
+      <div class="mx-auto">
+        <div class="flex flex-col items-center text-center">
+          <img src="/images/school1.jpg" style="border-radius: 10px;"
+            class="w-full h-60  shadow-[0_2px_22px_-4px_rgba(93,96,127,0.6)] border-2 border-white" />
+          <img src="/images/banner1.jpg"
+            class="slideshow-img w-full h-60 shadow-[0_2px_22px_-4px_rgba(93,96,127,0.6)] border-2 border-white absolute inset-0"
+            style="border-radius: 10px; display: none;" />
+          <img src="/images/slide2.jpg"
+            class="slideshow-img w-full h-60 shadow-[0_2px_22px_-4px_rgba(93,96,127,0.6)] border-2 border-white absolute inset-0"
+            style="border-radius: 10px; display: none;" />
+        </div>
+      </div>
+      <div
+        class="bg-gray-300 w-10 h-10 grid items-center justify-center rounded-full rotate-90 shrink-0 cursor-pointer absolute left-5 top-0 bottom-0 my-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-800 inline" viewBox="0 0 24 24">
+          <path fill-rule="evenodd"
+            d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+            clip-rule="evenodd" data-original="#000000"></path>
+        </svg>
+      </div>
+      <div
+        class="bg-gray-800 w-10 h-10 grid items-center justify-center rounded-full -rotate-90 shrink-0 cursor-pointer absolute right-5 top-0 bottom-0 my-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-[#fff] inline" viewBox="0 0 24 24">
+          <path fill-rule="evenodd"
+            d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+            clip-rule="evenodd" data-original="#000000"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  {{!-- end carousel --}}
 
-            </div>
+  {{!-- marquee --}}
+  <div
+    class="bg-[#FDBB4B] animate-gradient-x text-black text-bold h-1  shadow-lg p-8 w-full font-[sans-serif] flex items-center justify-center">
+    <marquee class="text-base font-italic" behavior="scroll" direction="left" scrollamount="3">
+      Learn Anywhere, Achieve Everywhere.
+    </marquee>
+  </div>
+  {{!-- end marquee --}}
+  {{!-- content 1 --}}
+  <div class="bg-white font-[sans-serif]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 max-lg:max-w-3xl max-md:max-w-md mx-auto">
+        <div
+          class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+          <img src="https://readymadeui.com/Imagination.webp" alt="Blog Post 1" class="w-full h-60 object-cover" />
+          <div class="p-6">
+            <span class="text-sm block text-gray-400 mb-2">10 FEB 2023 | BY JOHN DOE</span>
+            <h3 class="text-xl font-bold text-gray-800">A Guide to Igniting Your Imagination</h3>
+            <hr class="my-4" />
+            <p class="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan,
+              nunc
+              et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
+          </div>
+        </div>
+        <div
+          class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+          <img src="https://readymadeui.com/hacks-watch.webp" alt="Blog Post 2" class="w-full h-60 object-cover" />
+          <div class="p-6">
+            <span class="text-sm block text-gray-400 mb-2">7 JUN 2023 | BY MARK ADAIR</span>
+            <h3 class="text-xl font-bold text-gray-800">Hacks to Supercharge Your Day</h3>
+            <hr class="my-4" />
+            <p class="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan,
+              nunc
+              et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
+          </div>
+        </div>
+        <div
+          class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+          <img src="https://readymadeui.com/prediction.webp" alt="Blog Post 3" class="w-full h-60 object-cover" />
+          <div class="p-6">
+            <span class="text-sm block text-gray-400 mb-2">5 OCT 2023 | BY SIMON KONECKI</span>
+            <h3 class="text-xl font-bold text-gray-800">Trends and Predictions</h3>
+            <hr class="my-4" />
+            <p class="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan,
+              nunc
+              et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+  {{!-- end content 1 --}}
+
+  {{!-- content 2 --}}
+  <div class="font-sans bg-white p-4">
+    <div class="md:max-w-5xl max-w-xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="text-left">
+          <h2 class="text-gray-800 text-2xl font-bold mb-4">Elevate Your Online Presence</h2>
+          <p class="mb-4 text-sm text-gray-500">Canada has a rich Indigenous history, and the education
+            system is working towards reconciliation by integrating
+            Indigenous cultures and teachings into mainstream education.
+            Efforts are being made to make education more culturally relevant
+            and supportive for Indigenous students.</p>
+          <p class="text-sm text-gray-500">Canada has a rich Indigenous history, and the education
+            system is working towards reconciliation by integrating
+            Indigenous cultures and teachings into mainstream education.
+            Efforts are being made to make education more culturally relevant
+            and supportive for Indigenous students.</p>
+          <button type="button"
+            class="mt-6 px-5 py-2.5 rounded-full text-white text-sm tracking-wider font-medium border border-current outline-none bg-blue-700 hover:bg-blue-800 active:bg-blue-700">Get
+            started</button>
+        </div>
+        <div class="max-h-72">
+          <img src="https://readymadeui.com/management-img.webp" alt="Placeholder Image"
+            class="rounded-lg object-contain w-full h-full" />
+        </div>
+      </div>
+      <hr class="border-gray-300 my-12" />
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="max-h-72 max-md:order-1">
+          <img src="https://readymadeui.com/analtsis.webp" alt="Placeholder Image"
+            class="rounded-lg object-contain w-full h-full" />
+        </div>
+        <div class="text-left">
+          <h2 class="text-gray-800 text-2xl font-bold mb-4">Your Success, Our Commitment</h2>
+          <p class="mb-4 text-sm text-gray-500">The system is decentralized, meaning that education is
+            administered by provincial governments, which allows each
+            province to tailor its curriculum to its specific needs. Canada
+            ranks highly in international assessments, with a strong
+            emphasis on inclusivity, technology integration, and teacher
+            quality..</p>
+
+          <button type="button"
+            class="mt-6 px-5 py-2.5 rounded-full text-white text-sm tracking-wider font-medium border border-current outline-none bg-blue-700 hover:bg-blue-800 active:bg-blue-700">Get
+            started</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- end content 2 --}}
+
 </main>
+<!-- End Body -->
+<script src="/js/caroulsel.js"></script>

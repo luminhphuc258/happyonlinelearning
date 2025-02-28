@@ -1,7 +1,6 @@
 
 export const handleLogin = async (req, res) => {
   console.log("Calling for Login!");
-  console.log("User attached by middleware:", req.user);
 
   // If the middleware has set req.user, I assume the login is valid
   if (req.session.isLoggined) {

@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db/connection.js'; // adjust the path as necessary
+import sequelize from '../db/connection.js';
 
 const QuestionsSchema = sequelize.define('questions', {
   id: {

@@ -87,35 +87,6 @@ export const addUser = async (req, res) => {
   }
 };
 
-// Method to fetch all users
-
-// export const fetchAllUsers = async (req, res) => {
-//   try {
-//     console.log("============ Calling to get users data ================");
-//     // Fetch all users
-//     const allUsers = await UsersSchema.findAll();
-//     let formattedUsers = [];
-
-//     for (const user of allUsers) {
-//       formattedUsers.push({
-//         userId: user.user_id,
-//         username: user.username,
-//         email: user.email,
-//         firstName: user.first_name,
-//         lastName: user.last_name,
-//         isActive: user.is_active,
-//         address: user.address,
-//         phone: user.phone,
-//         avatar: user.avatar
-//       });
-//     }
-
-//     return formattedUsers;
-//   } catch (error) {
-//     console.error("Error fetching users:", error);
-//     return null;
-//   }
-// };
 
 export const fetchAllUsers = async () => {
   try {
@@ -148,7 +119,117 @@ export const fetchAllUsers = async () => {
     console.error("Error fetching users:", error);
   }
 };
+// ------------ delete user info ---------------------------
+export const deleteUser = async (req, res) => {
+  console.log("Calling to delte this user");
+  const { myuserid } = req.body;
+  console.log(myuserid);
+
+  try {
+    console.log("Calling to delete this user", myuserid);
+
+    // First, delete the user from the userroles table
+    await UserRole.destroy({
+      where: {
+        user_id: myuserid
+      }
+    });
+
+    console.log(`User role for user_id ${myuserid} deleted.`);
+
+    // Then, delete the user from the users table
+    const result = await UsersSchema.destroy({
+      where: {
+        user_id: myuserid
+      }
+    });
+
+    if (result === 0) {
+      // If no user was deleted, the userId was not found
+      return res.status(404).json({
+        status: "error",
+        message: "User not found."
+      });
+    }
+
+    // If successful, send a response back
+    res.status(200).json({
+      status: "success",
+      message: "Update successfully"
+    });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error."
+    });
+  }
+}
 
 
+//------------ update use info
+export const CallBackendUpdateUser = async (req, res) => {
+  try {
+    console.log("CallBackendUpdateUser");
+
+    const { userId, lastName, firstName, email, role, phone, address } = req.body;
+    console.log(req.body);
+    // Update the users table
+    const updatedUser = await UsersSchema.update(
+      {
+        last_name: lastName,
+        first_name: firstName,
+        email: email,
+        phone: phone,
+        address: address,
+        updated_at: new Date()
+      },
+      {
+        where: {
+          user_id: userId
+        }
+      });
+
+    if (updatedUser[0] === 0) {
+      res.status(500).json({
+        status: "error",
+        message: "User not found."
+      });
+    }
+
+    // Update the userroles table (assuming only one role per user)
+    const updatedRole = await UserRole.update(
+      {
+        role_name: role,
+        assigned_at: new Date()
+      },
+      {
+        where: {
+          user_id: userId
+        }
+      });
+
+    if (updatedRole[0] === 0) {
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error."
+      });
+    }
+
+    //if everything is good ,let's  go ahead 
+    res.status(200).json({
+      status: "success",
+      message: "Update successfully"
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error."
+    });
+  }
+};
+//================= end 
 
 export default addUser;

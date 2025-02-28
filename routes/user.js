@@ -1,6 +1,7 @@
 import express from 'express';
 import { handleLogin } from "../handlers/login.js";
 import { checkUserRoleBeforeLogin } from '../middlewares/checkUserRoleBeforeLogin.js';
+import { CallBackendUpdateUser } from '../handlers/register.js'
 const router = express.Router();
 
 //One to render the form where users can input their details
@@ -39,7 +40,6 @@ router.get('/logout', (req, res) => {
     });
   }
 });
-
 
 
 export default router;

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import UsersSchema from '../models/user.js';
+import UserRole from '../models/userrole.js';
 import nodemailer from 'nodemailer';
 import dotenv from "dotenv";
 import { randomInt } from 'crypto';
@@ -85,5 +86,69 @@ export const addUser = async (req, res) => {
     });
   }
 };
+
+// Method to fetch all users
+
+// export const fetchAllUsers = async (req, res) => {
+//   try {
+//     console.log("============ Calling to get users data ================");
+//     // Fetch all users
+//     const allUsers = await UsersSchema.findAll();
+//     let formattedUsers = [];
+
+//     for (const user of allUsers) {
+//       formattedUsers.push({
+//         userId: user.user_id,
+//         username: user.username,
+//         email: user.email,
+//         firstName: user.first_name,
+//         lastName: user.last_name,
+//         isActive: user.is_active,
+//         address: user.address,
+//         phone: user.phone,
+//         avatar: user.avatar
+//       });
+//     }
+
+//     return formattedUsers;
+//   } catch (error) {
+//     console.error("Error fetching users:", error);
+//     return null;
+//   }
+// };
+
+export const fetchAllUsers = async () => {
+  try {
+    console.log("============ Calling to get users data ================");
+    // Fetch all users with their associated roles
+    const allUsers = await UsersSchema.findAll({
+      include: [{
+        model: UserRole,
+        as: 'UserRole',
+        attributes: ['user_role_id', 'role_name']
+      }]
+    });
+    console.log("=====check all users data ===")
+    console.log(JSON.stringify(allUsers, null, 2));
+
+    // Map over the fetched data to format it into a simpler object array
+    return allUsers.map(user => ({
+      userId: user.user_id,
+      username: user.username,
+      email: user.email,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      isActive: user.is_active,
+      address: user.address,
+      phone: user.phone,
+      avatar: user.avatar,
+      role: user.UserRole ? user.UserRole.role_name : 'No role'
+    }));
+  } catch (error) {
+    console.error("Error fetching users:", error);
+  }
+};
+
+
 
 export default addUser;

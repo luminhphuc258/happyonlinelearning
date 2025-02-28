@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/connection.js';
+import UserRole from '../models/userrole.js';
 
 const UserSchema = sequelize.define('users', {
   user_id: {
@@ -61,6 +62,11 @@ const UserSchema = sequelize.define('users', {
 }, {
   timestamps: false
 });
+
+// Set associations
+// In your User model file
+UserSchema.hasOne(UserRole, { foreignKey: 'user_id', as: 'UserRole' });
+UserRole.belongsTo(UserSchema, { foreignKey: 'user_id', as: 'UserRole' });
 
 // Sync the model with the database
 UserSchema.sync()

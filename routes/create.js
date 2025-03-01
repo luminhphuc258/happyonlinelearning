@@ -7,9 +7,13 @@ import handleUploadPicture from "../handlers/uploadpicture.js";
 import { storeQuizScore } from "../handlers/userscore.js";
 import { storeQuestion } from "../handlers/quiz.js";
 import { addProgram } from "../handlers/studyprogram.js";
+import { addCourse } from "../handlers/courses.js";
 
 // handle for adding new study program 
 router.post("/addnewstudyprogram", addProgram);
+
+// handle for adding new course
+router.post("/addnewcourses", addCourse);
 
 // handle for making new account
 router.post("/register", adduser);

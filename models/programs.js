@@ -23,6 +23,14 @@ const Program = sequelize.define('programs', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: true
+  },
+  start_date: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  end_date: {
+    type: DataTypes.DATE,
+    allowNull: false
   }
 }, {
   timestamps: false

@@ -6,7 +6,10 @@ import adduser from "../handlers/register.js";
 import handleUploadPicture from "../handlers/uploadpicture.js";
 import { storeQuizScore } from "../handlers/userscore.js";
 import { storeQuestion } from "../handlers/quiz.js";
+import { addProgram } from "../handlers/studyprogram.js";
 
+// handle for adding new study program 
+router.post("/addnewstudyprogram", addProgram);
 
 // handle for making new account
 router.post("/register", adduser);

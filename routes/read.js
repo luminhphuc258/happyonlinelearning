@@ -3,7 +3,9 @@ import { fetchQuestions, fetchAllQuestions } from "../handlers/quiz.js";
 import { quizAttempts } from "../handlers/userscore.js";
 import CheackHeaderTokenMiddleware from "../middlewares/checkHeaderToken.js";
 import { fetchAllUsers } from "../handlers/register.js";
+import { fetchAllPrograms } from "../handlers/studyprogram.js";
 
+// ==========================================ROUTER ZONE ============================================
 const router = express.Router();
 
 //============================================ USER AUTHENTICATION ===================================
@@ -14,6 +16,41 @@ router.get('/oauth2callback', async (req, res) => {
   req.session.emailtoken = tokens;
   // Store these tokens securely for sending emails later
 });
+
+//============================================ PROGRAM MANAGEMENT ====================================
+router.get('/getallprograms', async (req, res) => {
+  if (req.session.isLoggined) {
+    try {
+      const listdata = await fetchAllPrograms();
+      console.log("===========here data return=========");
+      console.log(listdata); // Logging the data to make sure we received it
+
+      // Pass the listusers array to the Handlebars view
+      res.render('studyprogram', {
+        username: req.session.username,
+        isLoggined: true,
+        userRole: req.session.role,
+        fullName: req.session.fullname,
+        email: req.session.email,
+        useravatar: req.session.picture,
+        returnlists: listdata
+      });
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+      res.status(500).render('error', { error: 'Failed to fetch user data' });
+    }
+  } else {
+    res.render('login', {
+      username: '',
+      isLoggined: false,
+      userRole: '',
+      fullName: '',
+      email: '',
+      useravatar: ''
+    });
+  }
+});
+
 
 
 //============================================ USER MANAGEMENT ========================================

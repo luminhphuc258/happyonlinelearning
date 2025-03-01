@@ -47,6 +47,23 @@ server.use(deleteRouter);
 Handlebars.registerHelper('eq', function (a, b) {
   return a === b;
 });
+
+// auto break works
+Handlebars.registerHelper('wordBreak', function (description) {
+  let words = description.split(' ');
+  let result = '';
+
+  for (let i = 0; i < words.length; i++) {
+    result += words[i] + ' ';
+    if ((i + 1) % 7 === 0) {
+      // Add a line break after every 9 words
+      result += '<br>';
+    }
+  }
+
+  return new Handlebars.SafeString(result.trim()); // Use SafeString to render HTML tags
+});
+
 //set up handlerbar
 server.engine("hbs", engine({
   extname: ".hbs",

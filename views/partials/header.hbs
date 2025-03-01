@@ -5,6 +5,9 @@
     </section>
 
     <div class="flex flex-wrap items-center justify-between py-3 px-4 sm:px-10 bg-[#FDBB4B] lg:gap-y-4 gap-y-6 gap-x-4">
+
+      <!-- Already logged in -->
+      {{#if isLoggined}}
       <a href="javascript:void(0)"> <img src="/images/teacher_students.gif" class="size-8">
       </a>
       <div id="collapseMenu"
@@ -30,8 +33,7 @@
                 d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
             </svg>
           </li>
-          <!-- Already logged in -->
-          {{#if isLoggined}}
+
           <!-- Admin menu -->
           <li class="group max-lg:border-b max-lg:px-3 max-lg:py-3 relative">
             <a href='javascript:void(0)'
@@ -114,19 +116,63 @@
             class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
             <a href='#' class="text-black block text-[15px] font-medium">Assessment management</a>
           </li>
-          {{else}}
-          <!-- Not logged in -->
-          <li
-            class="max-lg:border-b max-lg:py-3 relative lg:after:absolute lg:after:bg-[#3498db] lg:after:w-full lg:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
-            <a href='/login' class="text-black block text-[15px] font-medium">Login</a>
-          </li>
-          <li
-            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
-            <a href='/register' class="text-black block text-[15px] font-medium">Register</a>
-          </li>
-          {{/if}}
         </ul>
       </div>
+      {{else}}
+      <!--  menu for Not logged in -->
+      {{!-- <li
+        class="max-lg:border-b max-lg:py-3 relative lg:after:absolute lg:after:bg-[#3498db] lg:after:w-full lg:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+        <a href='/login' class="text-black block text-[15px] font-medium">Login</a>
+      </li>
+      <li
+        class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+        <a href='/register' class="text-black block text-[15px] font-medium">Register</a>
+      </li> --}}
+      <div class="flex flex-wrap items-center justify-between gap-4 w-full max-w-screen-xl mx-auto">
+        <div id="collapseMenu"
+          class="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50">
+          <button id="toggleClose"
+            class="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-black" viewBox="0 0 320.591 320.591">
+              <path
+                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                data-original="#000000"></path>
+              <path
+                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                data-original="#000000"></path>
+            </svg>
+          </button>
+
+          <ul
+            class="lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
+            <li class="mb-6 hidden max-lg:block">
+              <a href="javascript:void(0)"> <img src="/images/teacher_students.gif" class="size-8">
+              </a>
+            </li>
+            <li class="max-lg:border-b max-lg:py-3 px-3">
+              <a href='/register' class="hover:text-[#007bff] text-gray-600 font-bold block text-base">SignUp</a>
+            </li>
+            <li class="max-lg:border-b max-lg:py-3 px-3"><a href='/login'
+                class="hover:text-[#007bff] text-gray-600 font-bold block text-base">Login</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex items-center max-lg:ml-auto space-x-4">
+          <button id="toggleOpen" class="lg:hidden">
+            <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+
+      {{!-- end not logined --}}
+      {{/if}}
+
       {{!-- start icons right --}}
       {{#if isLoggined}}
       <div class="flex items-center max-sm:ml-auto">
@@ -155,7 +201,7 @@
                   </svg>
                 </div>
                 <div id="profile-dropdown-menu" style="display: none;"
-                  class="bg-white block z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] max-sm:-right-32 absolute right-0 top-14">
+                  class="rounded bg-white block z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] max-sm:-right-32 absolute right-0 top-8 before:w-4 before:h-4 before:rotate-45 before:bg-white before:absolute before:-top-1.5 before:left-0  before:right-0 before:mx-auto">
                   <div class="flex flex-wrap items-center justify-center flex-col cursor-pointer">
                     <img src='{{useravatar}}' class="w-32 h-32 rounded-full" />
                     <h4 class="text-base text-gray-800 font-bold mt-3">{{fullName}}</h4>
@@ -177,31 +223,8 @@
               </svg>
             </button>
           </div>
-
           {{!-- end logout --}}
-
-
-          <li
-            class="relative px-1 lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
-            <span class="relative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" class="cursor-pointer fill-white"
-                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-              </svg>
-              <span
-                class="absolute left-auto -ml-1 -top-1 rounded-full bg-red-500 px-1 py-0 text-xs text-white">0</span>
-            </span>
-          </li>
         </ul>
-
-        <button id="toggleOpen" class="lg:hidden ml-6">
-          <svg class="w-7 h-7" fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </button>
       </div>
       {{/if}}
       {{!-- end icons --}}

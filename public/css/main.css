@@ -40,6 +40,16 @@ footer {
  max-width: 1000px;
 }
 
+#imgloginright{
+    background: url('../images/lock9.jpg') no-repeat center center fixed;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-y: hidden;
+    width:100%;
+    height:100%;
+    animation: slideShow 30s infinite;
+}
+
 /* Make the page responsive for mobile */
 @media (max-width: 768px) {
  
@@ -56,4 +66,25 @@ background-image: url('/images/topbanner_300.jpg') !important;
   background-repeat: no-repeat;
   background-size: cover;
   }
+}
+
+
+/*zoom effect */
+@keyframes slideShow {
+     0%, 100% {
+        background-size: 120%;
+        background-position: left center;
+    }
+    25% {
+        background-size: 150%;
+        background-position: center center;
+    }
+    50% {
+        background-size: 120%;
+        background-position: right center;
+    }
+    75% {
+        background-size: 150%;
+        background-position: center center;
+    }
 }

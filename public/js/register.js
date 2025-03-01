@@ -1,4 +1,5 @@
 let correctOTP = '';
+let newUserID = '';
 function show_toast_success() {
   $("#toast_wrapper").fadeIn(1000).delay(2000).slideUp(1000);
 
@@ -8,6 +9,50 @@ function show_toast_error() {
   $("#toast_wrapper_error").fadeIn(1000).delay(2000).slideUp(1000);
 }
 
+function hideOTPform() {
+  $("#modal_OTP").hide(500);
+}
+
+async function valid_User_OTP() {
+  var userinputOTP = $("#userinputOTP").val();
+  if (correctOTP === userinputOTP) {
+    window.location.href = "/login";
+  } else {
+    // show error
+    showErrorMessage("InValid OTP!");
+    //calling to delete this user newUserID
+    const myuserid = newUserID;
+    try {
+      const localurl = "http://localhost:3000/deleteUser";
+      const response = await fetch(localurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          myuserid
+        }),
+      });
+
+      // Handling the response
+      const data = await response.json();
+
+
+      if (data.status === "success") {
+        console.log("===> successfully delete the new user!");
+      } else {
+        showErrorMessage("===> Something wrong with the new user!");
+      }
+      hideOTPform();
+    } catch (error) {
+      showErrorMessage(error);
+      hideOTPform();
+    }
+
+    //======= end 
+  }
+
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -62,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         show_toast_success();
         correctOTP = data.user.verificationotp;
+        newUserID = data.user.user_id;
         console.log("===> Response Data:", data.user.verificationotp);
         setTimeout(() => {
           $("#modal_OTP").fadeIn(500);
@@ -69,10 +115,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       } else {
         show_toast_error();
+        $("#modal_OTP").hide();
         window.location.href = "http://localhost:3000/register";
         console.error("Error:", data);
       }
     } catch (error) {
+      $("#modal_OTP").hide();
       console.error("Fetch error:", error);
       showErrorMessage("Cannot connect to server!");
     }

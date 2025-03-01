@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 // import handle bar
 import { engine } from "express-handlebars";
 import dotenv from "dotenv";
+import Handlebars from 'handlebars';
 
 
 // Define __filename and __dirname using import.meta.url
@@ -42,6 +43,10 @@ server.use(readRouter);
 server.use(updateRouter);
 server.use(deleteRouter);
 
+// register helper
+Handlebars.registerHelper('eq', function (a, b) {
+  return a === b;
+});
 //set up handlerbar
 server.engine("hbs", engine({
   extname: ".hbs",

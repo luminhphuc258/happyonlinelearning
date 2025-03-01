@@ -12,8 +12,8 @@
   <br>
   {{!-- end search --}}
   <div class="font-[sans-serif] overflow-x-auto">
-    <table id="userliststable" class="min-w-full bg-white">
-      <thead class="whitespace-nowrap">
+    <table id="userliststable" class="min-w-full bg-white border border-blue-300 cursor-pointer">
+      <thead class="whitespace-nowrap bg-blue-300">
         <tr>
           <th class="pl-4 w-8">
             <input id="checkbox" type="checkbox" class="hidden peer" />
@@ -34,7 +34,7 @@
       </thead>
       <tbody class="whitespace-nowrap">
         {{#each users}}
-        <tr class="odd:bg-blue-50">
+        <tr class="odd:bg-blue-50 hover:bg-blue-200">
           <td class="pl-4 w-8">
             <input id="checkbox{{this.userId}}" type="checkbox" class="hidden peer" />
             <label for="checkbox{{this.userId}}"
@@ -58,7 +58,7 @@
           <td class="p-4 text-sm text-black">{{this.role}}</td>
           <td class="p-4">
             <label class="relative cursor-pointer">
-              <input type="checkbox" class="sr-only peer" {{#if this.isActive}}checked{{/if}}>
+              <input type="checkbox" class="sr-only peer" {{#if this.isActive}}checked{{/if}} disabled>
               <div
                 class="w-11 h-6 flex items-center bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:absolute after:left-[2px] peer-checked:after:border-white after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#007bff]">
               </div>
@@ -94,6 +94,48 @@
         {{/each}}
       </tbody>
     </table>
+    <div class="md:flex m-4 justify-center">
+
+      <div class="flex items-center max-md:mt-4 ">
+        <p class="text-sm text-gray-500">Display</p>
+        <select class="text-sm text-gray-500 border border-gray-400 rounded h-7 mx-4 px-1 outline-none">
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+
+        <ul class="flex space-x-1 ml-2">
+          <li class="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+              <path
+                d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
+                data-original="#000000" />
+            </svg>
+          </li>
+          <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
+            1
+          </li>
+          <li class="flex items-center justify-center cursor-pointer text-sm bg-[#007bff] text-white w-7 h-7 rounded">
+            2
+          </li>
+          <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
+            3
+          </li>
+          <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
+            4
+          </li>
+          <li class="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+              <path
+                d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
+                data-original="#000000" />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
   <!-- End Body -->
 </main>
@@ -205,9 +247,9 @@
 
           <ul id="dropdownMenuRole" style="display:none"
             class="absolute block shadow-lg bg-white py-2 z-[1000] min-w-full w-max rounded max-h-96 overflow-auto left-0">
-            <li class="py-2.5 px-5 hover:bg-blue-50 text-black text-sm cursor-pointer">Students</li>
-            <li class="py-2.5 px-5 hover:bg-blue-50 text-black text-sm cursor-pointer">Instructors</li>
-            <li class="py-2.5 px-5 hover:bg-blue-50 text-black text-sm cursor-pointer">Admin</li>
+            <li class="py-2.5 px-5 hover:bg-blue-50 text-black text-sm cursor-pointer">student</li>
+            <li class="py-2.5 px-5 hover:bg-blue-50 text-black text-sm cursor-pointer">instructor</li>
+            <li class="py-2.5 px-5 hover:bg-blue-50 text-black text-sm cursor-pointer">admin</li>
           </ul>
         </div>
         {{!-- end role --}}

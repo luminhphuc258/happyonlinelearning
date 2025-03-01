@@ -4,6 +4,7 @@ import UserRole from '../models/userrole.js';
 import nodemailer from 'nodemailer';
 import dotenv from "dotenv";
 import { randomInt } from 'crypto';
+import { Sequelize } from 'sequelize';
 
 dotenv.config();
 
@@ -24,7 +25,15 @@ export const addUser = async (req, res) => {
   }
 
   try {
-    const existingUser = await UsersSchema.findOne({ where: { username } });
+    const existingUser = await UsersSchema.findOne({
+      where: {
+        [Sequelize.Op.or]: [
+          { username },   // Check for username duplicate
+          { email }       // Check for email duplicate
+        ]
+      }
+    });
+
     if (existingUser) {
       return res.status(409).json({
         status: "error",
@@ -40,44 +49,87 @@ export const addUser = async (req, res) => {
       username,
       password_hash: hashedPassword,
       created_at: new Date(),
-      is_active: 0,
+      is_active: 1,
       address: address || null,
       phone: phone || null,
       avatar: pictureurl || '/images/logo1.png'
     });
-
-    console.log("User creation successful:");
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
+    // find this new user info 
+    const userinfo = await UsersSchema.findOne({
+      where: {
+        username: username
       }
     });
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: 'No-Reply: OTP test - Welcome to Our Service!',
-      text: 'Please use this number for your OTP: ' + otp
-    };
+    if (userinfo) {
+      // add user role for new user at the least privilege - student
+      const newUserRole = await UserRole.create({
+        user_id: userinfo.user_id,
+        role_name: 'student',
+        assigned_at: new Date()
+      });
 
-    await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully');
+      if (newUserRole) {
+        console.log("User creation successful:");
 
-    res.status(200).json({
-      status: "success",
-      message: "User created successfully",
-      user: {
-        user_id: newUser.user_id,
-        username: newUser.username,
-        email: newUser.email,
-        first_name: newUser.first_name,
-        last_name: newUser.last_name,
-        avatar: newUser.avatar,
-        verificationotp: otp
+        //------send email to new user for verification
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD
+          }
+        });
+
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: email,
+          subject: 'No-Reply: OTP test - Welcome to Our Service!',
+          text: 'Please use this number for your OTP: ' + otp
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully');
+
+        // return data to view
+        res.status(200).json({
+          status: "success",
+          message: "User created successfully",
+          user: {
+            user_id: newUser.user_id,
+            username: newUser.username,
+            email: newUser.email,
+            first_name: newUser.first_name,
+            last_name: newUser.last_name,
+            avatar: newUser.avatar,
+            verificationotp: otp
+          }
+        });
+
+      } else {
+        console.log("Error Cannot add role for this new user");
+
+        // auto delete this new user from db if we cannit add this to user role table
+        await UsersSchema.destroy({
+          where: {
+            user_id: userinfo.user_id
+          }
+        });
+        //------------------
+
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error."
+        });
       }
-    });
+    } else {
+      console.log("Error Cannot found new user");
+      res.status(500).json({
+        status: "error",
+        message: "Internal server error."
+      });
+    }
+
   } catch (error) {
     console.error("Error adding user:", error);
     res.status(500).json({

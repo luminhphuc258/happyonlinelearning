@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db/connection.js'; // Ensure this path correctly points to your database connection setup file
-
+import sequelize from '../db/connection.js';
 const Submission = sequelize.define('submissions', {
   submission_id: {
     type: DataTypes.INTEGER,

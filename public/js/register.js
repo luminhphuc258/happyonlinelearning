@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-
     const url = "http://localhost:3000/register";
 
     try {

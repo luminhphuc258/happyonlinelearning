@@ -5,7 +5,7 @@ import CheackHeaderTokenMiddleware from "../middlewares/checkHeaderToken.js";
 import { fetchAllUsers } from "../handlers/register.js";
 import { fetchAllPrograms } from "../handlers/studyprogram.js";
 import { fetchAllCourse } from "../handlers/courses.js";
-import { fetchAllmyCourses } from "../handlers/assignments.js";
+import { fetchAllmyCourses, fetchAllAssignment, HandleAssignmentSubmission, checkAssignmentStatus } from "../handlers/assignments.js";
 // ==========================================ROUTER ZONE ============================================
 const router = express.Router();
 
@@ -62,7 +62,63 @@ router.get('/getassignmentpage', async (req, res) => {
 });
 
 
+//get assignment history
+router.get('/getassignmenthistorypage', async (req, res) => {
+  console.log('===> check point calling to /assignmentslist:', req.session.SelectedAssignmentList);
+  if (req.session.SelectedAssignmentList) {
+    // Pass the listusers array to the Handlebars view
+    res.render('assignmentshistory', {
+      username: req.session.username,
+      isLoggined: true,
+      userRole: req.session.role,
+      fullName: req.session.fullname,
+      email: req.session.email,
+      useravatar: req.session.picture,
+      returnlists: req.session.SelectedAssignmentList,
+      courname: req.session.SelectedAssignmentCourTitle
+    });
+  } else {
+    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  }
+});
 
+
+// Define a route that uses query parameters
+router.get('/assignmentslist', (req, res) => {
+
+  console.log('===> check point calling to /assignmentslist:', req.session.SelectedAssignmentList);
+  if (req.session.SelectedAssignmentList) {
+    // Pass the listusers array to the Handlebars view
+    res.render('assignmentslist', {
+      username: req.session.username,
+      isLoggined: true,
+      userRole: req.session.role,
+      fullName: req.session.fullname,
+      email: req.session.email,
+      useravatar: req.session.picture,
+      returnlists: req.session.SelectedAssignmentList,
+      courname: req.session.SelectedAssignmentCourTitle
+    });
+  } else {
+    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  }
+});
+
+
+// get all assignments of the selected course
+router.post('/getallassignmentsbelongthecourse', fetchAllAssignment);
+
+
+// calling to submission
+router.post('/callingtosubmission', HandleAssignmentSubmission);
+
+
+// calling to check assignment status
+router.post('/callingtocheckassignmentstatus', checkAssignmentStatus);
+
+
+
+//============================================ COURSE MANAGEMENT ====================================
 // get all courses
 router.get('/getallmycourses', async (req, res) => {
   if (req.session.isLoggined) {
@@ -109,7 +165,8 @@ router.get('/getallmycourses', async (req, res) => {
 });
 
 
-//============================================ COURSE MANAGEMENT ====================================
+
+//================================== PROGRAM MANAGEMENT ===============================================
 router.get('/getprogramsforcourseform', async (req, res) => {
   if (req.session.isLoggined) {
     try {

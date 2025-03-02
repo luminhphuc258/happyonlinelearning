@@ -29,10 +29,34 @@ function show_Modal_Add() {
   $("#modalUpdateUser").fadeIn(500);
 }
 
-function show_Modal(programID, course_code,) {
-  alert("call me to go assignment upload page");
-  alert(course_code);
-  alert(programID);
+async function show_Modal(programID, course_code) {
+  try {
+    const response = await fetch("http://localhost:3000/getallassignmentsbelongthecourse", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        program_id: programID,
+        course_code: course_code
+      }),
+    });
+
+    // Handling the response
+    const data = await response.json();
+
+    if (data.message === "success") {
+      // ------- calling to assignment lists
+      window.location.href = '/assignmentslist';
+    } else {
+      show_toast_error();
+    }
+    closeModalDelete();
+  } catch (error) {
+    console.log(error);
+    closeModalDelete();
+  }
+
 }
 
 // get data for  program combox 
@@ -103,7 +127,7 @@ async function CallBackendAddData() {
     const data = await response.json();
     console.log("===> data", data);
 
-    if (data.status === "success") {
+    if (data.message === "success") {
       show_toast_success();
     } else {
       show_toast_error();
@@ -114,6 +138,8 @@ async function CallBackendAddData() {
     closeModalDelete();
   }
 }
+
+
 
 
 

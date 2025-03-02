@@ -3,7 +3,7 @@
   {{!-- breadcrumb --}}
   <ul class="flex items-center justify-left font-[sans-serif] space-x-4 mt-4 ml-5">
     <li class="text-gray-500 text-base cursor-pointer">
-      <a href="/">DashBoard</a>
+      <a href="/assignmentslist">List of Assignments</a>
     </li>
     <li>
       <svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-400 w-3.5 -rotate-90" viewBox="0 0 24 24">
@@ -13,32 +13,93 @@
       </svg>
     </li>
     <li class="text-gray-800 text-base font-bold cursor-pointer">
-      <a href="/getassignmentpage">Lists of Courses</a>
+      <a href="/getassignmenthistorypage">Assignment History</a>
     </li>
   </ul>
 
   {{!-- end --}}
-  <h4 class="text-gray-800 text-2xl  font-bold mb-5 text-center mt-5"> <svg xmlns="http://www.w3.org/2000/svg"
-      class="fill-blue-600 w-8 inline-block" viewBox="0 0 512 512">
-      <path
-        d="M437 268.152h-50.118c-6.821 0-13.425.932-19.71 2.646-12.398-24.372-37.71-41.118-66.877-41.118h-88.59c-29.167 0-54.479 16.746-66.877 41.118a74.798 74.798 0 0 0-19.71-2.646H75c-41.355 0-75 33.645-75 75v80.118c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45v-80.118c0-41.355-33.645-75-75-75zm-300.295 36.53v133.589H45c-8.271 0-15-6.729-15-15v-80.118c0-24.813 20.187-45 45-45h50.118c4.072 0 8.015.553 11.769 1.572a75.372 75.372 0 0 0-.182 4.957zm208.59 133.589h-178.59v-133.59c0-24.813 20.187-45 45-45h88.59c24.813 0 45 20.187 45 45v133.59zm136.705-15c0 8.271-6.729 15-15 15h-91.705v-133.59a75.32 75.32 0 0 0-.182-4.957 44.899 44.899 0 0 1 11.769-1.572H437c24.813 0 45 20.187 45 45v80.119z"
-        data-original="#000000" />
-      <path
-        d="M100.06 126.504c-36.749 0-66.646 29.897-66.646 66.646-.001 36.749 29.897 66.646 66.646 66.646 36.748 0 66.646-29.897 66.646-66.646s-29.897-66.646-66.646-66.646zm-.001 103.292c-20.207 0-36.646-16.439-36.646-36.646s16.439-36.646 36.646-36.646 36.646 16.439 36.646 36.646-16.439 36.646-36.646 36.646zM256 43.729c-49.096 0-89.038 39.942-89.038 89.038s39.942 89.038 89.038 89.038 89.038-39.942 89.038-89.038c0-49.095-39.942-89.038-89.038-89.038zm0 148.076c-32.554 0-59.038-26.484-59.038-59.038 0-32.553 26.484-59.038 59.038-59.038s59.038 26.484 59.038 59.038c0 32.554-26.484 59.038-59.038 59.038zm155.94-65.301c-36.748 0-66.646 29.897-66.646 66.646.001 36.749 29.898 66.646 66.646 66.646 36.749 0 66.646-29.897 66.646-66.646s-29.897-66.646-66.646-66.646zm0 103.292c-20.206 0-36.646-16.439-36.646-36.646.001-20.207 16.44-36.646 36.646-36.646 20.207 0 36.646 16.439 36.646 36.646s-16.439 36.646-36.646 36.646z"
-        data-original="#000000" />
-    </svg>&nbsp;My Courses</h4>
+  <h4 class="text-green-800 text-2xl  font-bold mb-5 text-center mt-5 bg-green">
+    &nbsp;A List of previous submissions </b>
+  </h4>
 
   {{!-- end filter date controll --}}
   {{!-- program lists --}}
-  <div class="bg-blue-100 min-h-screen p-4 font-sans">
-    <div class="max-w-4xl max-lg:max-w-2xl max-sm:max-w-sm mx-auto">
-      <div id="comboboxprogram_content" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {{!-- Start sub items --}}
-        {{!-- ------- --}}
-        {{!-- end sub items --}}
+  {{#each returnlists}}
+  <div class="font-[sans-serif] mt-4">
+    <div class="space-y-4 max-w-5xl mx-auto mt-4">
+      {{!-- sub items --}}
+      <div class="shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-lg border-l-8 border-green-600" role="accordion">
+        <button type="button" onclick="setAssignmentID({{this.assignment_id}});"
+          class="accordion-button w-full text-sm font-semibold text-left py-5 px-6 text-green-800 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-8 mr-4 shrink-0" viewBox="0 0 512 512">
+            <path
+              d="M227.656 357.508a15.13 15.13 0 0 0 10.692 4.426c4.007 0 7.851-1.59 10.687-4.426l53.973-53.973c5.906-5.906 5.906-15.476 0-21.383-5.903-5.902-15.477-5.902-21.38 0l-43.28 43.282-19.735-19.735c-5.906-5.902-15.476-5.902-21.383 0-5.902 5.903-5.902 15.477 0 21.383zm0 0"
+              data-original="#000000" />
+            <path
+              d="M250.121 439.844c66.176 0 120.012-53.84 120.012-120.016S316.297 199.816 250.12 199.816c-66.18 0-120.016 53.836-120.016 120.012s53.84 120.016 120.016 120.016zm0-209.793c49.504 0 89.777 40.273 89.777 89.777s-40.273 89.781-89.777 89.781-89.781-40.277-89.781-89.78 40.277-89.778 89.781-89.778zm0 0"
+              data-original="#000000" />
+            <path
+              d="M451.344 32.191H423.77V15.117C423.77 6.77 417 0 408.652 0s-15.117 6.77-15.117 15.117v17.074h-29.707V15.117C363.828 6.77 357.058 0 348.707 0c-8.348 0-15.117 6.77-15.117 15.117v17.074H166.652V15.117c0-8.347-6.77-15.117-15.12-15.117-8.348 0-15.118 6.77-15.118 15.117v17.074h-29.707V15.117C106.707 6.77 99.937 0 91.586 0c-8.348 0-15.117 6.77-15.117 15.117v17.074H48.89C21.934 32.191 0 54.125 0 81.086v382.023C0 490.066 21.934 512 48.89 512h402.454c26.96 0 48.89-21.934 48.89-48.89V81.085c0-26.961-21.933-48.895-48.89-48.895zm18.652 430.918c0 10.286-8.367 18.657-18.652 18.657H48.89c-10.286 0-18.657-8.371-18.657-18.657V157.9h439.762zM30.234 81.086c0-10.29 8.371-18.656 18.657-18.656h27.578v17.074c0 8.348 6.77 15.117 15.12 15.117 8.348 0 15.118-6.77 15.118-15.117V62.43h29.707v17.074c0 8.348 6.77 15.117 15.121 15.117 8.348 0 15.117-6.77 15.117-15.117V62.43H333.59v17.074c0 8.348 6.77 15.117 15.12 15.117 8.349 0 15.118-6.77 15.118-15.117V62.43h29.707v17.074c0 8.348 6.77 15.117 15.117 15.117 8.352 0 15.121-6.77 15.121-15.117V62.43h27.57C461.63 62.43 470 70.797 470 81.086v46.574H30.234zm0 0"
+              data-original="#000000" />
+          </svg>
+          <span class="mr-4 text-lg text-green-600">{{this.title}} ({{this.total_points}}%)
+            <span class="text-xs text-gray-600 mt-1 block font-medium">
+              Due Date: {{this.due_date}}
+            </span>
+            <span class="text-xs text-gray-600 mt-1 block font-medium text-purple-600">Status:
+              {{this.submission_status}} - <a>Details</a></span>
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-[14px] h-[14px] arrow fill-current ml-auto shrink-0 transition-all duration-300"
+            viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+              clip-rule="evenodd" data-original="#000000"></path>
+          </svg>
+        </button>
+
+        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+          <div class="pb-5 px-6 mt-2">Requirements
+            <p class="text-sm text-gray-600 leading-relaxed mt-4">
+              <b>{{this.description}}</b>
+            </p>
+          </div>
+          <hr>
+          <br>
+          <p class="text-sm text-gray-600 leading-relaxed mt-4">
+            <b class="ml-5">Submission Time: {{this.submission_time}}</b>
+          </p>
+
+          <p class="text-sm text-gray-600 leading-relaxed mt-4">
+            <b class="ml-5">Your documents</b>
+          </p>
+          {{!-- start table --}}
+          <table class="min-w-full divide-y divide-gray-200 ml-5 w-[80%]">
+            <thead class="bg-gray-100 whitespace-nowrap">
+              <tr>
+                <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Your Files
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="bg-white divide-y divide-gray-200 whitespace-nowrap">
+              <tr>
+                <td class="px-4 py-4 text-sm text-blue-800">
+                  {{this.submission_file}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {{!-- end file table --}}
+        </div>
+        <br>
       </div>
+      {{!-- end sub menu --}}
     </div>
   </div>
+  {{/each}}
+  <br>
   {{!-- end program lists --}}
   <!-- End Body -->
 </main>
@@ -60,7 +121,7 @@
         data-original="#000000" />
     </svg>
     &nbsp;&nbsp;
-    <span class="text-center font-semibold tracking-wide">Update successfully</span>
+    <span class="text-center font-semibold tracking-wide">Submit successfully</span>
     &nbsp;&nbsp;
     <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] mr-3 fill-green-500" viewBox="0 0 512 512">
       <ellipse cx="246" cy="246" rx="246" ry="246" />
@@ -85,7 +146,7 @@
         data-original="#000000" />
     </svg>
     &nbsp;&nbsp;
-    <span class="text-center font-semibold tracking-wide">Failure update the program information!!</span>
+    <span class="text-center font-semibold tracking-wide">Error with submission!</span>
     &nbsp;&nbsp;
     <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] shrink-0 fill-red-500 inline mr-3" viewBox="0 0 32 32">
       <path
@@ -96,125 +157,6 @@
 </div>
 <!-- end toasts -->
 
-
-{{!-- modal --}}
-<div style="display: none;" id="modalUpdateUser"
-  class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
-  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-8 relative">
-    <div class="flex items-center">
-      <h3 class="text-green-600 text-xl font-bold flex-1"></h3>
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 ml-2 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500"
-        viewBox="0 0 320.591 320.591">
-        <path
-          d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-          data-original="#000000"></path>
-        <path
-          d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-          data-original="#000000"></path>
-      </svg>
-    </div>
-
-    <form class="space-y-4 mt-8">
-      <div>
-        <label class="text-gray-800 text-sm mb-2 block">Program Name </label>
-        <input type="text" id="program_name" placeholder="Enter program name"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-green-600 focus:bg-transparent rounded-lg" />
-      </div>
-
-      <div>
-        <label class="text-gray-800 text-sm mb-2 block">Program Description</label>
-        <input type="text" id="description" placeholder="Enter description"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-green-600 focus:bg-transparent rounded-lg" />
-      </div>
-
-      <div>
-        <label class="text-gray-800 text-sm mb-2 block">Total credit</label>
-        <input id="total_credits" type="number" placeholder="Enter total credits"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-green-600 focus:bg-transparent rounded-lg"
-          required />
-      </div>
-
-      <div>
-        <label class="text-gray-800 text-sm mb-2 block">start Date</label>
-        {{!-- start --}}
-        <div>
-          <input type="date" id="start_date"
-            class="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm outline-[#007bff] rounded" />
-        </div>
-        {{!-- end --}}
-      </div>
-
-      <div>
-        <label class="text-gray-800 text-sm mb-2 block">End Date</label>
-        {{!-- start --}}
-        <div>
-          <input type="date" id="end_date"
-            class="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm outline-[#007bff] rounded" />
-        </div>
-        {{!-- end --}}
-      </div>
-
-      <div class="flex justify-end gap-4 !mt-8">
-        <button type="button" onclick="closeModalUpdate()"
-          class="px-6 py-3 rounded-lg text-gray-800 text-sm border-none outline-none tracking-wide bg-gray-200 hover:bg-gray-300">Cancel</button>
-        <button type="button" onclick="CallBackendUpdate()"
-          class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-green-600 hover:bg-green-700">Submit</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-{{!-- delete modal --}}
-<div id="modal_delete" style="display: none;"
-  class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
-  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
-    <svg xmlns="http://www.w3.org/2000/svg"
-      class="w-3.5 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500 float-right" viewBox="0 0 320.591 320.591">
-      <path
-        d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-        data-original="#000000"></path>
-      <path
-        d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-        data-original="#000000"></path>
-    </svg>
-
-    <div class="my-4 text-center">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="#007bff" class="w-8 mb-6 inline-block"
-        viewBox="0 0 682.667 682.667">
-        <defs>
-          <clipPath id="a" clipPathUnits="userSpaceOnUse">
-            <path d="M0 512h512V0H0Z" data-original="#000000" />
-          </clipPath>
-        </defs>
-        <g fill="none" stroke="#007bff" stroke-miterlimit="10" stroke-width="30" clip-path="url(#a)"
-          transform="matrix(1.33 0 0 -1.33 0 682.667)">
-          <path
-            d="M226 15v60c0 16.568-13.432 30-30 30H76c-16.568 0-30-13.432-30-30V15Zm-45 165c0-24.853-20.147-45-45-45s-45 20.147-45 45 20.147 45 45 45 45-20.147 45-45ZM466 15v60c0 16.568-13.432 30-30 30H316c-16.568 0-30-13.432-30-30V15Zm-45 165c0-24.853-20.147-45-45-45s-45 20.147-45 45 20.147 45 45 45 45-20.147 45-45Zm-75 167v-50.294L286 347h-60.002L166 296.706V347h-15c-41.421 0-75 33.579-75 75s33.579 75 75 75h210c41.421 0 75-33.579 75-75s-33.579-75-75-75Zm-105 75h30m-90 0h30m90 0h30"
-            data-original="#000000" />
-        </g>
-      </svg>
-      <h4 class="text-gray-800 text-base font-semibold mt-4">Which semester do you want to study "<span
-          id="title_program" class="text-blue-700"></span>" ?</h4>
-      <div>
-        <br>
-        <select id="enrollsemester" class="text-red-500">
-          <option value="1">Spring</option>
-          <option value="2">Summer</option>
-          <option value="3">Fall</option>
-          <option value="4">Winter</option>
-        </select>
-      </div>
-
-      <div class="text-center space-x-4 mt-8">
-        <input type="hidden" id="userfordeleted">
-        <button type="button" onclick="closeModalDelete()"
-          class="px-4 py-2 rounded-lg text-gray-800 text-sm bg-gray-200 hover:bg-gray-300 active:bg-gray-200">Cancel</button>
-        <button type="button" onclick="CallBackendAddData()"
-          class="px-4 py-2 rounded-lg text-white text-sm bg-red-600 hover:bg-red-700 active:bg-red-600">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
 {{!-- notification --}}
 <div id="validnotifcation" name="validnotifcation" style="display: none;"
   class="bg-red-50 text-red-800 p-6 rounded-lg relative" role="alert">
@@ -244,5 +186,5 @@
 
 <!-- end main body -->
 <!-- Include jQuery UI -->
-<script src="/js/assignments.js"></script>
+<script src="/js/assignmentslist.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

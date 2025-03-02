@@ -5,6 +5,7 @@ import CheackHeaderTokenMiddleware from "../middlewares/checkHeaderToken.js";
 import { fetchAllUsers } from "../handlers/register.js";
 import { fetchAllPrograms } from "../handlers/studyprogram.js";
 import { fetchAllCourse } from "../handlers/courses.js";
+import { fetchAllmyCourses } from "../handlers/assignments.js";
 // ==========================================ROUTER ZONE ============================================
 const router = express.Router();
 
@@ -50,6 +51,63 @@ router.get('/getallprograms', async (req, res) => {
     });
   }
 });
+//============================================ ASSIGNMENT MANAGEMENT ====================================
+// get assignment pages
+router.get('/getassignmentpage', async (req, res) => {
+  if (req.session.isLoggined) {
+    res.render('assignments', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+
+
+// get all courses
+router.get('/getallmycourses', async (req, res) => {
+  if (req.session.isLoggined) {
+    try {
+      const listdata = await fetchAllmyCourses(); // This now returns the list of courses
+      console.log("===========here data return=========");
+      console.log(listdata);
+
+      // Create an empty array to store the result
+      let programArray = [];
+
+      // Mapping through the data and pushing into the array
+      listdata.forEach((course) => {
+        programArray.push({
+          course_id: course.course_id,
+          program_id: course.program_id,
+          course_code: course.course_code,
+          title: course.title,
+          description: course.description,
+          credits: course.credits,
+          semester: course.semester,
+          is_active: course.is_active,
+          registration_start: course.registration_start,
+          registration_end: course.registration_end
+        });
+      });
+
+      // Return the response with the mapped program array
+      return res.status(200).json({ message: "success", CourseLists: programArray });
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  } else {
+    res.render('login', {
+      username: '',
+      isLoggined: false,
+      userRole: '',
+      fullName: '',
+      email: '',
+      useravatar: ''
+    });
+  }
+});
+
 
 //============================================ COURSE MANAGEMENT ====================================
 router.get('/getprogramsforcourseform', async (req, res) => {
@@ -162,6 +220,15 @@ router.get('/getallusers', async (req, res) => {
   }
 });
 
+// ============================== STUDENT FUNCTIONS ===========================================
+// ============================= ENROLLMENT ===================================================
+router.get('/getenrollmentpage', async (req, res) => {
+  if (req.session.isLoggined) {
+    res.render('enrollment', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
 
 
 

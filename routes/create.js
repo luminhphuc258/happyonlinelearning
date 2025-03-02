@@ -8,12 +8,16 @@ import { storeQuizScore } from "../handlers/userscore.js";
 import { storeQuestion } from "../handlers/quiz.js";
 import { addProgram } from "../handlers/studyprogram.js";
 import { addCourse } from "../handlers/courses.js";
+import { handleRequestToEnroll } from "../handlers/enrollments.js";
 
 // handle for adding new study program 
 router.post("/addnewstudyprogram", addProgram);
 
 // handle for adding new course
 router.post("/addnewcourses", addCourse);
+
+// handle for requesting to enrollment from students
+router.post("/RequestToEnrollment", handleRequestToEnroll);
 
 // handle for making new account
 router.post("/register", adduser);

@@ -87,7 +87,6 @@ function closeModalDelete() {
 
 // function areas
 function show_Modal_update() {
-  alert("call me")
   $("#modalUpdateUser").fadeIn(500);
 }
 

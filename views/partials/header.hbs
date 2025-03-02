@@ -162,6 +162,14 @@
           {{!--------------------------------------------------- start student menu --------------------------
           --------------------------------------}}
           {{#if (eq userRole 'student')}}
+          {{!-- enroll to program --}}
+          <li
+            class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
+            <a href='/getenrollmentpage' class="text-black block text-[15px] font-medium capitalize">&nbsp;&nbsp;Program
+              Enrollment</a>
+          </li>
+
+          {{!-- end enrollment --}}
           <li class="group max-lg:border-b max-lg:px-3 max-lg:py-3 relative">
             <a href='javascript:void(0)'
               class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
@@ -188,9 +196,9 @@
                 </a>
               </li>
               <li class="border-b py-3">
-                <a href='javascript:void(0)'
+                <a href='/getassignmentpage'
                   class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20px" height="20px"
+                  <svg xmlns="http://www.w3.  org/2000/svg" fill="none" width="20px" height="20px"
                     class="mr-4 inline-block" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                     class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"

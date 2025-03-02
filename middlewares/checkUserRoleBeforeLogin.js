@@ -41,14 +41,12 @@ export const checkUserRoleBeforeLogin = async (req, res, next) => {
         // assigned role and other user info for session management
         //============== end finding
         console.log("info user from db");
-        const userid = user.dataValues.user_id;
         const Username = user.dataValues.username;
         const usrRole = roleobject.role_name;
-        const UserId = user.dataValues.id;
+        const UserId = user_id;
         const fullname = user.dataValues.last_name + " " + user.dataValues.first_name;
         const picture = user.dataValues.avatar;
         const email = user.dataValues.email;
-        console.log("user id:" + userid);
         // Generate JWT token
         const token = jwt.sign(
           { id: UserId, username: Username, role: usrRole }, process.env.JWT_SECRET || '****', { expiresIn: '1h' }
@@ -56,7 +54,9 @@ export const checkUserRoleBeforeLogin = async (req, res, next) => {
 
         console.log("====TOKEN RETURN======")
         console.log(token);
+        console.log(UserId);
         console.log("=====================");
+        req.session.currentuserid = UserId;
         req.session.username = Username;
         req.session.role = usrRole;
         req.session.token = token;

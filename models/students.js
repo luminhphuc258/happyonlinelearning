@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/connection.js';
-
+import UserSchema from '../models/user.js';
 const Student = sequelize.define('students', {
   student_id: {
     type: DataTypes.INTEGER,
@@ -34,6 +34,13 @@ const Student = sequelize.define('students', {
 }, {
   timestamps: false
 });
+
+// Define the association with User
+Student.belongsTo(UserSchema, {
+  foreignKey: 'user_id',
+  as: 'user'
+});
+
 
 // This creates the table if it doesn't already exist
 Student.sync()

@@ -5,6 +5,7 @@ import CheackHeaderTokenMiddleware from "../middlewares/checkHeaderToken.js";
 import { fetchAllUsers } from "../handlers/register.js";
 import { fetchAllPrograms } from "../handlers/studyprogram.js";
 import { fetchAllCourse } from "../handlers/courses.js";
+import { fetchAllAssignmentForInstructor } from "../handlers/gradingstudents.js"
 import { fetchAllmyCourses, fetchAllAssignment, HandleAssignmentSubmission, checkAssignmentStatus } from "../handlers/assignments.js";
 // ==========================================ROUTER ZONE ============================================
 const router = express.Router();
@@ -51,6 +52,41 @@ router.get('/getallprograms', async (req, res) => {
     });
   }
 });
+//=========================================== COURSE ASSESSMENT ==========================================
+// get assignment pages
+router.get('/getteachingcourses', async (req, res) => {
+  if (req.session.isLoggined) {
+    res.render('teachingcourses', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+// Define a route that uses query parameters
+router.get('/assignmentslistsubmissionsforinstructor', (req, res) => {
+
+  console.log('===> check point calling to /assignmentslistsubmissionsforinstructor:', req.session.SelectedgroupedAssignments);
+  if (req.session.SelectedgroupedAssignments) {
+    // Pass the listusers array to the Handlebars view
+    res.render('gradingstudents', {
+      username: req.session.username,
+      isLoggined: true,
+      userRole: req.session.role,
+      fullName: req.session.fullname,
+      email: req.session.email,
+      useravatar: req.session.picture,
+      returnlists: req.session.SelectedgroupedAssignments,
+      courname: req.session.SelectedAssignmentCourTitleInstructor
+    });
+  } else {
+    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  }
+});
+
+// get all assignments of the selected course
+router.post('/getalllistofstudentassignment', fetchAllAssignmentForInstructor);
+
+
 //============================================ ASSIGNMENT MANAGEMENT ====================================
 // get assignment pages
 router.get('/getassignmentpage', async (req, res) => {

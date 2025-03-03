@@ -105,8 +105,7 @@
           --------------------------------------}}
           {{#if (eq userRole 'instructor')}}
           <li class="group max-lg:border-b max-lg:px-3 max-lg:py-3 relative">
-            <a href='javascript:void(0)'
-              class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
+            <a href='#' class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
               &nbsp;&nbsp;Accessment Management
               <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" class="ml-1 inline-block"
                 viewBox="0 0 24 24">
@@ -118,17 +117,6 @@
             {{!-- submenu --}}
             <ul
               class="absolute top-5 max-lg:top-8 left-0 z-50 block space-y-2 shadow-lg bg-white max-h-0 overflow-hidden min-w-[230px] group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-[400ms]">
-              <li class="border-b py-3">
-                <a href='/getallprogram'
-                  class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" class="mr-4 inline-block"
-                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-                  </svg>
-                  Assignment Management
-                </a>
-              </li>
               <li class="border-b py-3">
                 <a href='javascript:void(0)'
                   class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
@@ -142,7 +130,7 @@
                 </a>
               </li>
               <li class="border-b py-3">
-                <a href='javascript:void(0)'
+                <a href='/getteachingcourses'
                   class="hover:text-[#007bff] hover:fill-[#007bff] text-gray-800 text-[15px] flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="20px" height="20px"
                     class="mr-4 inline-block" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -150,7 +138,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 0 1-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 0 0 .657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 0 0 5.427-.63 48.05 48.05 0 0 0 .582-4.717.532.532 0 0 0-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 0 0 .658-.663 48.422 48.422 0 0 0-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 0 1-.61-.58v0Z" />
                   </svg>
-                  Grade Management
+                  Score Management
                 </a>
               </li>
             </ul>
@@ -238,14 +226,6 @@
       </div>
       {{else}}
       <!--  menu for Not logged in -->
-      {{!-- <li
-        class="max-lg:border-b max-lg:py-3 relative lg:after:absolute lg:after:bg-[#3498db] lg:after:w-full lg:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
-        <a href='/login' class="text-black block text-[15px] font-medium">Login</a>
-      </li>
-      <li
-        class="max-lg:border-b max-lg:py-3 relative lg:hover:after:absolute lg:after:bg-[#3498db] lg:after:w-0 lg:hover:after:w-full lg:hover:after:h-[5px] lg:after:block lg:after:-bottom-4 lg:after:transition-all lg:after:duration-300">
-        <a href='/register' class="text-black block text-[15px] font-medium">Register</a>
-      </li> --}}
       <div class="flex flex-wrap items-center justify-between gap-4 w-full max-w-screen-xl mx-auto">
         <div id="collapseMenu"
           class="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50">

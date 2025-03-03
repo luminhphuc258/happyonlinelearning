@@ -64,6 +64,15 @@ Handlebars.registerHelper('wordBreak', function (description) {
   return new Handlebars.SafeString(result.trim()); // Use SafeString to render HTML tags
 });
 
+// Define a custom helper to count items in an array
+Handlebars.registerHelper('count', function (array) {
+  if (Array.isArray(array)) {
+    return array.length;
+  } else {
+    return 0; // Return 0 if it's not an array
+  }
+});
+
 //set up handlerbar
 server.engine("hbs", engine({
   extname: ".hbs",

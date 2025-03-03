@@ -10,6 +10,7 @@ import { addProgram } from "../handlers/studyprogram.js";
 import { addCourse } from "../handlers/courses.js";
 import { handleRequestToEnroll } from "../handlers/enrollments.js";
 
+
 // handle for adding new study program 
 router.post("/addnewstudyprogram", addProgram);
 
@@ -30,6 +31,8 @@ router.post("/storeQuestion", storeQuestion);
 
 // UPLOAD DOCUMENTS - PICTURES
 router.post("/uploaduserpicture", upload.single("userfile"), handleUploadPicture);
+
+
 
 
 export default router;

@@ -1,0 +1,287 @@
+<main>
+  <!-- Start main body -->
+  {{!-- breadcrumb --}}
+  <ul class="flex items-center justify-left font-[sans-serif] space-x-4 mt-4 ml-5">
+    <li class="text-gray-500 text-base cursor-pointer">
+      <a href="/assignmentslist">List of Assignments in "{{courname}}"</a>
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-400 w-3.5 -rotate-90" viewBox="0 0 24 24">
+        <path fill-rule="evenodd"
+          d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+          clip-rule="evenodd" data-original="#000000"></path>
+      </svg>
+    </li>
+    <li class="text-gray-800 text-base font-bold cursor-pointer">
+      <a href="/getassignmenthistorypage">Student Grading</a>
+    </li>
+  </ul>
+
+  {{!-- end --}}
+  <h4 class="text-green-800 text-2xl  font-bold mb-5 text-center mt-5 bg-green">
+    &nbsp;A List of student's submissions</b>
+  </h4>
+
+  {{!-- end filter date controll --}}
+  {{!-- program lists --}}
+  {{#each returnlists}}
+  <div class="font-[sans-serif] mt-4">
+    <div class="space-y-4 max-w-5xl mx-auto mt-4">
+      {{!-- sub items --}}
+      <div class="shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-lg border-l-8 border-green-600" role="accordion">
+        <button type="button" onclick="setAssignmentID({{this.assignment_id}});"
+          class="accordion-button w-full text-sm font-semibold text-left py-5 px-6 text-green-800 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-8 mr-4 shrink-0" viewBox="0 0 512 512">
+            <path
+              d="M227.656 357.508a15.13 15.13 0 0 0 10.692 4.426c4.007 0 7.851-1.59 10.687-4.426l53.973-53.973c5.906-5.906 5.906-15.476 0-21.383-5.903-5.902-15.477-5.902-21.38 0l-43.28 43.282-19.735-19.735c-5.906-5.902-15.476-5.902-21.383 0-5.902 5.903-5.902 15.477 0 21.383zm0 0"
+              data-original="#000000" />
+            <path
+              d="M250.121 439.844c66.176 0 120.012-53.84 120.012-120.016S316.297 199.816 250.12 199.816c-66.18 0-120.016 53.836-120.016 120.012s53.84 120.016 120.016 120.016zm0-209.793c49.504 0 89.777 40.273 89.777 89.777s-40.273 89.781-89.777 89.781-89.781-40.277-89.781-89.78 40.277-89.778 89.781-89.778zm0 0"
+              data-original="#000000" />
+            <path
+              d="M451.344 32.191H423.77V15.117C423.77 6.77 417 0 408.652 0s-15.117 6.77-15.117 15.117v17.074h-29.707V15.117C363.828 6.77 357.058 0 348.707 0c-8.348 0-15.117 6.77-15.117 15.117v17.074H166.652V15.117c0-8.347-6.77-15.117-15.12-15.117-8.348 0-15.118 6.77-15.118 15.117v17.074h-29.707V15.117C106.707 6.77 99.937 0 91.586 0c-8.348 0-15.117 6.77-15.117 15.117v17.074H48.89C21.934 32.191 0 54.125 0 81.086v382.023C0 490.066 21.934 512 48.89 512h402.454c26.96 0 48.89-21.934 48.89-48.89V81.085c0-26.961-21.933-48.895-48.89-48.895zm18.652 430.918c0 10.286-8.367 18.657-18.652 18.657H48.89c-10.286 0-18.657-8.371-18.657-18.657V157.9h439.762zM30.234 81.086c0-10.29 8.371-18.656 18.657-18.656h27.578v17.074c0 8.348 6.77 15.117 15.12 15.117 8.348 0 15.118-6.77 15.118-15.117V62.43h29.707v17.074c0 8.348 6.77 15.117 15.121 15.117 8.348 0 15.117-6.77 15.117-15.117V62.43H333.59v17.074c0 8.348 6.77 15.117 15.12 15.117 8.349 0 15.118-6.77 15.118-15.117V62.43h29.707v17.074c0 8.348 6.77 15.117 15.117 15.117 8.352 0 15.121-6.77 15.121-15.117V62.43h27.57C461.63 62.43 470 70.797 470 81.086v46.574H30.234zm0 0"
+              data-original="#000000" />
+          </svg>
+          <span class="mr-4 text-lg text-green-600">{{this.title}} ({{this.total_points}}%)
+            <span class="text-xs text-gray-600 mt-1 block font-medium">
+              Due Date: {{this.due_date}}
+            </span>
+            <span class="text-xs text-gray-600 mt-1 block font-medium text-purple-600">
+              Total Submissions: {{count this.submissions}}
+            </span>
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-[14px] h-[14px] arrow fill-current ml-auto shrink-0 transition-all duration-300"
+            viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+              clip-rule="evenodd" data-original="#000000"></path>
+          </svg>
+        </button>
+
+        <div class="accordion-content overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+          <div class="pb-5 px-6 mt-2">Requirements
+            <p class="text-sm text-gray-600 leading-relaxed mt-4">
+              <b>{{this.description}}</b>
+            </p>
+          </div>
+          <hr>
+          <br>
+          {{!-- start table for all submission--}}
+          <div class="overflow-x-auto ml-5 w-[90%]">
+            <table class="min-w-full divide-y divide-gray-200 ml-5 w-[100%]">
+              <thead class="bg-gray-100 whitespace-nowrap">
+                <tr>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Student Id
+                  </th>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    First Name
+                  </th>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Last Name
+                  </th>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Submission Status
+                  </th>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Submission Time
+                  </th>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Files
+                  </th>
+                  <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Earned Points
+                  </th>
+                  <th>Grading</th>
+                </tr>
+              </thead>
+
+              <tbody class="bg-white divide-y divide-gray-200 whitespace-nowrap">
+                {{!-- loop to get student data --}}
+                <input id="assignmentIDVal" type="hidden" value="{{this.assignment_id}}">
+                {{#each this.submissions}}
+                <tr>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.student_id}}
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.first_name}}
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.last_name}}
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.submission_status}}
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.submission_time}}
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.submission_file}}
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    {{this.earned_points}}%
+                  </td>
+                  <td class="px-4 py-4 text-sm text-blue-800">
+                    <button type="button"
+                      onclick="show_Modal_AddGrade('{{this.student_id}}', '{{this.first_name}}', '  {{this.last_name}}');">Grading</button>
+                  </td>
+                </tr>
+                {{/each}}
+                {{!-- end loop table --}}
+              </tbody>
+            </table>
+          </div>
+          {{!-- end file table --}}
+        </div>
+        <br>
+      </div>
+      {{!-- end sub menu --}}
+    </div>
+  </div>
+  {{/each}}
+  <br>
+  {{!-- end program lists --}}
+  <!-- End Body -->
+</main>
+{{!-- modal update grade --}}
+{{!-- modal --}}
+<div style="display: none;" id="modalUpdateUser"
+  class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-8 relative">
+    <div class="flex items-center">
+      <h3 class="text-blue-600 text-xl font-bold flex-1">Giving Score</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 ml-2 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500"
+        viewBox="0 0 320.591 320.591">
+        <path
+          d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+          data-original="#000000"></path>
+        <path
+          d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+          data-original="#000000"></path>
+      </svg>
+    </div>
+
+    <form class="space-y-4 mt-8">
+      <div>
+        <labe class="text-gray-800 text-sm mb-2 block">Last Name</labe>
+        <input type="text" id="lastName" placeholder="Enter last name"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg" />
+      </div>
+
+      <div>
+        <labe class="text-gray-800 text-sm mb-2 block">First Name</labe>
+        <input type="text" id="firstName" placeholder="Enter first name"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg" />
+      </div>
+
+      <div>
+        <labe class="text-gray-800 text-sm mb-2 block">Grade</labe>
+        <input type="number" id="Grade" placeholder="Enter first name"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
+          required />
+      </div>
+      <div>
+        <label class="text-gray-800 text-sm mb-2 block">Feedback</label>
+        <input type="text" id="Feedback" placeholder="Enter first name"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
+          required />
+      </div>
+
+      <div class="flex justify-end gap-4 !mt-8">
+        <button type="button" onclick="closeModalUpdate()"
+          class="px-6 py-3 rounded-lg text-gray-800 text-sm border-none outline-none tracking-wide bg-gray-200 hover:bg-gray-300">Cancel</button>
+        <button type="button" onclick="updatestudentGrade()"
+          class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue-600 hover:bg-blue-700">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{!-- end --}}
+
+<!-- Toast messages area -->
+
+<!-- toast success -->
+<div id="toast_wrapper" style="display: none;"
+  class="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+  <div id="toast_success"
+    class="w-[310px] bg-white text-center shadow-lg border-l-4 border-green-500 text-gray-800 flex items-center p-4 rounded-md">
+    <svg xmlns="http://www.w3.org/2000/svg" class="spinner-6 w-10 h-10 shrink-0 animate-spin"
+      viewBox="0 0 512.004 512.004">
+      <path
+        d="M256.002 93.869c-89.404 0-162.133 72.73-162.133 162.133s72.73 162.133 162.133 162.133 162.133-72.73 162.133-162.133S345.406 93.869 256.002 93.869zm0 307.2c-79.991 0-145.067-65.075-145.067-145.067s65.075-145.067 145.067-145.067 145.067 65.075 145.067 145.067-65.075 145.067-145.067 145.067z"
+        data-original="#000000" />
+      <path
+        d="M256.002 204.802c-28.237 0-51.2 22.963-51.2 51.2s22.963 51.2 51.2 51.2 51.2-22.963 51.2-51.2-22.963-51.2-51.2-51.2zm0 85.333c-18.825 0-34.133-15.309-34.133-34.133s15.309-34.133 34.133-34.133c18.825 0 34.133 15.309 34.133 34.133s-15.308 34.133-34.133 34.133zm0 179.201c-110.309 0-201.332-84.157-212.237-191.638l9.938 9.938c1.664 1.664 3.849 2.5 6.033 2.5s4.369-.836 6.033-2.5a8.525 8.525 0 0 0 0-12.066l-25.6-25.6a8.813 8.813 0 0 0-.625-.566c-.107-.088-.22-.165-.33-.247-.112-.083-.221-.171-.338-.248-.137-.092-.28-.173-.421-.256-.097-.057-.191-.118-.291-.172-.152-.081-.307-.151-.463-.223-.096-.045-.19-.093-.289-.134-.162-.067-.327-.123-.492-.18-.097-.034-.193-.072-.292-.102a8.602 8.602 0 0 0-.547-.141c-.087-.02-.172-.046-.26-.064a8.26 8.26 0 0 0-.714-.109c-.037-.004-.073-.012-.11-.016a8.592 8.592 0 0 0-1.727 0c-.037.004-.073.012-.11.016a8.602 8.602 0 0 0-.714.109c-.088.018-.173.043-.26.064-.183.043-.366.086-.546.141-.099.03-.195.069-.292.102-.165.057-.33.113-.492.18-.098.041-.191.089-.287.134-.156.072-.312.142-.464.224-.1.053-.194.115-.291.172-.141.083-.283.164-.421.256-.116.077-.224.164-.336.247-.111.083-.224.16-.332.249a8.346 8.346 0 0 0-.624.565l-25.6 25.6a8.525 8.525 0 0 0 0 12.066 8.523 8.523 0 0 0 12.066 0l11.889-11.889C36.507 393.581 135.61 486.402 256.002 486.402c4.71 0 8.533-3.823 8.533-8.533s-3.822-8.533-8.533-8.533zm253.5-244.967a8.523 8.523 0 0 0-12.066 0l-11.889 11.889C475.498 118.423 376.395 25.602 256.002 25.602a8.536 8.536 0 0 0-8.533 8.533 8.536 8.536 0 0 0 8.533 8.533c110.309 0 201.332 84.157 212.237 191.638l-9.938-9.938a8.523 8.523 0 0 0-12.066 0 8.523 8.523 0 0 0 0 12.066l25.6 25.6c.199.199.408.387.625.565.096.079.198.148.297.222.124.093.246.189.375.276.116.078.238.145.357.217.12.072.237.147.36.213.121.065.246.119.369.178.129.061.255.125.388.18.12.05.242.089.364.133.141.051.28.105.424.149.121.037.245.063.367.094.147.037.292.078.442.108.144.029.289.045.434.066.13.019.259.044.391.057a8.442 8.442 0 0 0 1.682 0c.132-.013.261-.038.391-.057.144-.021.289-.038.433-.066.15-.03.296-.071.443-.108.122-.031.245-.057.366-.094.144-.044.284-.098.425-.149.121-.044.244-.084.363-.133.132-.055.259-.119.388-.18.123-.059.248-.113.369-.178.123-.066.24-.141.36-.213.119-.072.24-.139.357-.217.129-.086.251-.182.375-.276.099-.074.2-.143.297-.222.217-.178.427-.367.625-.565l25.6-25.6a8.523 8.523 0 0 0 0-12.065z"
+        data-original="#000000" />
+    </svg>
+    &nbsp;&nbsp;
+    <span class="text-center font-semibold tracking-wide">Submit successfully</span>
+    &nbsp;&nbsp;
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] mr-3 fill-green-500" viewBox="0 0 512 512">
+      <ellipse cx="246" cy="246" rx="246" ry="246" />
+      <path class="fill-white"
+        d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z" />
+    </svg>
+  </div>
+</div>
+
+<!-- Toast error -->
+<div id="toast_wrapper_error" style="display: none;"
+  class="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
+  <div
+    class="w-[310px] bg-white text-center shadow-lg border-l-4 border-red-500 text-gray-800 flex items-center p-4 rounded-md">
+    <svg xmlns="http://www.w3.org/2000/svg" class="spinner-6 w-10 h-10 shrink-0 animate-spin"
+      viewBox="0 0 512.004 512.004">
+      <path
+        d="M256.002 93.869c-89.404 0-162.133 72.73-162.133 162.133s72.73 162.133 162.133 162.133 162.133-72.73 162.133-162.133S345.406 93.869 256.002 93.869zm0 307.2c-79.991 0-145.067-65.075-145.067-145.067s65.075-145.067 145.067-145.067 145.067 65.075 145.067 145.067-65.075 145.067-145.067 145.067z"
+        data-original="#000000" />
+      <path
+        d="M256.002 204.802c-28.237 0-51.2 22.963-51.2 51.2s22.963 51.2 51.2 51.2 51.2-22.963 51.2-51.2-22.963-51.2-51.2-51.2zm0 85.333c-18.825 0-34.133-15.309-34.133-34.133s15.309-34.133 34.133-34.133c18.825 0 34.133 15.309 34.133 34.133s-15.308 34.133-34.133 34.133zm0 179.201c-110.309 0-201.332-84.157-212.237-191.638l9.938 9.938c1.664 1.664 3.849 2.5 6.033 2.5s4.369-.836 6.033-2.5a8.525 8.525 0 0 0 0-12.066l-25.6-25.6a8.813 8.813 0 0 0-.625-.566c-.107-.088-.22-.165-.33-.247-.112-.083-.221-.171-.338-.248-.137-.092-.28-.173-.421-.256-.097-.057-.191-.118-.291-.172-.152-.081-.307-.151-.463-.223-.096-.045-.19-.093-.289-.134-.162-.067-.327-.123-.492-.18-.097-.034-.193-.072-.292-.102a8.602 8.602 0 0 0-.547-.141c-.087-.02-.172-.046-.26-.064a8.26 8.26 0 0 0-.714-.109c-.037-.004-.073-.012-.11-.016a8.592 8.592 0 0 0-1.727 0c-.037.004-.073.012-.11.016a8.602 8.602 0 0 0-.714.109c-.088.018-.173.043-.26.064-.183.043-.366.086-.546.141-.099.03-.195.069-.292.102-.165.057-.33.113-.492.18-.098.041-.191.089-.287.134-.156.072-.312.142-.464.224-.1.053-.194.115-.291.172-.141.083-.283.164-.421.256-.116.077-.224.164-.336.247-.111.083-.224.16-.332.249a8.346 8.346 0 0 0-.624.565l-25.6 25.6a8.525 8.525 0 0 0 0 12.066 8.523 8.523 0 0 0 12.066 0l11.889-11.889C36.507 393.581 135.61 486.402 256.002 486.402c4.71 0 8.533-3.823 8.533-8.533s-3.822-8.533-8.533-8.533zm253.5-244.967a8.523 8.523 0 0 0-12.066 0l-11.889 11.889C475.498 118.423 376.395 25.602 256.002 25.602a8.536 8.536 0 0 0-8.533 8.533 8.536 8.536 0 0 0 8.533 8.533c110.309 0 201.332 84.157 212.237 191.638l-9.938-9.938a8.523 8.523 0 0 0-12.066 0 8.523 8.523 0 0 0 0 12.066l25.6 25.6c.199.199.408.387.625.565.096.079.198.148.297.222.124.093.246.189.375.276.116.078.238.145.357.217.12.072.237.147.36.213.121.065.246.119.369.178.129.061.255.125.388.18.12.05.242.089.364.133.141.051.28.105.424.149.121.037.245.063.367.094.147.037.292.078.442.108.144.029.289.045.434.066.13.019.259.044.391.057a8.442 8.442 0 0 0 1.682 0c.132-.013.261-.038.391-.057.144-.021.289-.038.433-.066.15-.03.296-.071.443-.108.122-.031.245-.057.366-.094.144-.044.284-.098.425-.149.121-.044.244-.084.363-.133.132-.055.259-.119.388-.18.123-.059.248-.113.369-.178.123-.066.24-.141.36-.213.119-.072.24-.139.357-.217.129-.086.251-.182.375-.276.099-.074.2-.143.297-.222.217-.178.427-.367.625-.565l25.6-25.6a8.523 8.523 0 0 0 0-12.065z"
+        data-original="#000000" />
+    </svg>
+    &nbsp;&nbsp;
+    <span class="text-center font-semibold tracking-wide">Error with submission!</span>
+    &nbsp;&nbsp;
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] shrink-0 fill-red-500 inline mr-3" viewBox="0 0 32 32">
+      <path
+        d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
+        data-original="#ea2d3f" />
+    </svg>
+  </div>
+</div>
+<!-- end toasts -->
+
+{{!-- notification --}}
+<div id="validnotifcation" name="validnotifcation" style="display: none;"
+  class="bg-red-50 text-red-800 p-6 rounded-lg relative" role="alert">
+  <div class="mb-3 flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] cursor-pointer fill-red-500 inline mr-3 shrink-0"
+      viewBox="0 0 32 32">
+      <path
+        d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
+        data-original="#ea2d3f" />
+    </svg>
+    <strong class="font-bold text-sm mr-3">Error Message!</strong>
+  </div>
+  <span id="validnotifcation_messagecontent" name="validnotifcation_messagecontent"
+    class="block sm:inline text-sm"></span>
+
+  <svg id="btnclosemessagevalid" xmlns="http://www.w3.org/2000/svg"
+    class="w-3 cursor-pointer fill-red-500 absolute right-4 top-4" viewBox="0 0 320.591 320.591">
+    <path
+      d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+      data-original="#000000" />
+    <path
+      d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+      data-original="#000000" />
+  </svg>
+</div>
+{{!-- end notfication --}}
+
+<!-- end main body -->
+<!-- Include jQuery UI -->
+<script src="/js/teachingcourses.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

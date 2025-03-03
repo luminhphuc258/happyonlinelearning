@@ -1,5 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/connection.js';
+import Assignment from '../models/assignments.js';
+import Student from '../models/students.js';
+
 const Submission = sequelize.define('submissions', {
   submission_id: {
     type: DataTypes.INTEGER,
@@ -47,6 +50,17 @@ const Submission = sequelize.define('submissions', {
 }, {
   timestamps: false // Set to true if you want Sequelize to automatically manage createdAt and updatedAt
 });
+
+// Define the association with Student
+Submission.belongsTo(Student, {
+  foreignKey: 'student_id', as: 'student'
+});
+
+// Define the association with Assignment
+Submission.belongsTo(Assignment, {
+  foreignKey: 'assignment_id', as: 'assignment'
+});
+
 
 // This creates the table if it doesn't already exist
 Submission.sync()

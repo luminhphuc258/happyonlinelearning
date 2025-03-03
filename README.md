@@ -1,5 +1,7 @@
 # Happy E-Learning platform
 
+![Happy E-Learning Preview](demo.gif)
+
 
 A modern, full-featured e-learning platform built with Node.js and Express, featuring a responsive design and dynamic content management.
 

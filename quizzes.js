@@ -48,6 +48,12 @@ Handlebars.registerHelper('eq', function (a, b) {
   return a === b;
 });
 
+
+// Registering a Handlebars Helper
+Handlebars.registerHelper('inc', function (value) {
+  return parseInt(value) + 1;
+});
+
 // auto break works
 Handlebars.registerHelper('wordBreak', function (description) {
   let words = description.split(' ');

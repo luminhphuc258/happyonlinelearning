@@ -43,38 +43,83 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   //=================== end 
 
+  // // submit quiz
+  // document.getElementById("btnSubmitQuiz").addEventListener("click", async function (event) {
+  //   showConfirmModal();
+  // });
 
-  // submit quiz
-  document.getElementById("btnSubmitQuiz").addEventListener("click", async function (event) {
-    showConfirmModal();
-  });
+
 });
 
-$(document).ready(function () {
-  let quizCount = $('[role="accordion"]').length;
-  alert(quizCount);
-  // create left panel
-  totalquestions = quizCount
-  quizID = localStorage.getItem('quizinputID');
-  alert(quizID);
-  document.getElementById("menusetting").style.display = "none"
-  let leftmenu = document.getElementById("leftboard")
 
-  // create button for right menu
-  for (let i = 0; i < totalquestions; i++) {
-    var btnquestion = document.createElement("button");
-    let count = i + 1;
-    btnquestion.appendChild(document.createTextNode(count));
-    //set class name for each button
-    btnquestion.setAttribute("class", "btn btn-info mr-1 btnfixed");
-    btnquestion.setAttribute("data-question", count);
-    console.log(btnquestion)
-    // Add buton into cell
-    leftmenu.appendChild(btnquestion)
+async function DOTheQuiz(quizinputID) {
+  alert("Start " + quizinputID);
+  localStorage.setItem('loadingquizinputID', quizinputID);
+  // window.location.href = "/getallquestions/" + quizinputID;
+  const url = "http://localhost:3000/getLoadingQuestionsByQuizID";
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        quizId: quizinputID
+      }),
+    });
+
+    // Handling the response
+    const data = await response.json();
+    console.log("===> data" + data);
+
+    if (data) {
+      window.location.href = "/getLoadingQuestionsByQuizID";
+    } else {
+      show_toast_error();
+    }
+  } catch (error) {
   }
+}
 
 
-})
+function restartQuiz() {
+  window.location.reload()
+}
+
+// function startquiz() {
+//   const quiztopic = document.getElementById("quiztopic").value;
+//   const numberofquestions = document.getElementById("btnnumberquestions").value;
+
+//   if (!quiztopic || !numberofquestions) {
+//     alert("Please select all esstinal information!");
+//     return;
+//   }
+
+//   // assign value to total numbers
+//   totalquestions = numberofquestions
+//   quizID = quiztopic;
+
+//   document.getElementById("menusetting").style.display = "none"
+//   let leftmenu = document.getElementById("leftboard")
+
+//   // create button for right menu
+//   for (let i = 0; i < totalquestions; i++) {
+//     var btnquestion = document.createElement("button");
+//     let count = i + 1;
+//     btnquestion.appendChild(document.createTextNode(count));
+//     //set class name for each button
+//     btnquestion.setAttribute("class", "btn btn-info mr-1 btnfixed");
+//     btnquestion.setAttribute("data-question", count);
+//     console.log(btnquestion)
+//     // Add buton into cell
+//     leftmenu.appendChild(btnquestion)
+//     //==================================
+//   }
+
+//   //create question
+//   create_Questions(totalquestions)
+// }
 
 
 

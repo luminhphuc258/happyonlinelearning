@@ -1,11 +1,9 @@
-<!-- Start main body -->
 <main>
-  {{!-- search area --}}
-  <br>
+  <!-- Start main body -->
   {{!-- breadcrumb --}}
   <ul class="flex items-center justify-left font-[sans-serif] space-x-4 mt-4 ml-5">
     <li class="text-gray-500 text-base cursor-pointer">
-      <a href="/getquizepageforstudent">Courses</a>
+      <a href="/">DashBoard</a>
     </li>
     <li>
       <svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-400 w-3.5 -rotate-90" viewBox="0 0 24 24">
@@ -15,52 +13,33 @@
       </svg>
     </li>
     <li class="text-gray-800 text-base font-bold cursor-pointer">
-      <a href="/getassignmentpage"><span class="text-blue-500" id="courseQuizeName"></span> quiz list </a>
+      <a href="/getassignmentpage">Lists of Courses</a>
     </li>
   </ul>
 
   {{!-- end --}}
-  <br>
-  {{!-- button --}}
-  {{!-- end button --}}
-  {{!-- quiz list area --}}
-  {{#each quizzes}}
-  {{!-- check if this quiz is allowed to visiable or not --}}
-  {{#if (eq this.is_published 1)}}
-  <div class="bg-gray-50 px-6 py-5 font-[sans-serif]">
-    <div class="grid lg:grid-cols-1 gap-2">
-      <div class="space-y-6">
-        <div class="bg-white shadow-md rounded-lg transition-all" role="accordion">
-          <button type="button"
-            class="accordion-button w-full text-lg font-semibold text-left p-6 text-gray-800 flex items-center">
-            <span class="mr-4 text-blue-500">{{this.title}}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42"
-              class="w-[14px] h-[14px] fill-current ml-auto shrink-0">
-              <path class="plus"
-                d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z" />
-              <path
-                d="M37.059 16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5h32.118C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z" />
-            </svg>
-          </button>
-          <div class="accordion-content overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
-            <div class="pb-6 px-6">
-              <h3 class="text-blue-500">Total Point: {{this.total_points}}%</h3>
-              <h5 class="mt-4">Only Available From: <b>{{this.start_time}}</b> To: <b>{{this.end_time}}</b> </h5>
+  <h4 class="text-gray-800 text-2xl  font-bold mb-5 text-center mt-5"> <svg xmlns="http://www.w3.org/2000/svg"
+      class="fill-gray-600 w-8 inline-block" viewBox="0 0 512 512">
+      <path
+        d="M437 268.152h-50.118c-6.821 0-13.425.932-19.71 2.646-12.398-24.372-37.71-41.118-66.877-41.118h-88.59c-29.167 0-54.479 16.746-66.877 41.118a74.798 74.798 0 0 0-19.71-2.646H75c-41.355 0-75 33.645-75 75v80.118c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45v-80.118c0-41.355-33.645-75-75-75zm-300.295 36.53v133.589H45c-8.271 0-15-6.729-15-15v-80.118c0-24.813 20.187-45 45-45h50.118c4.072 0 8.015.553 11.769 1.572a75.372 75.372 0 0 0-.182 4.957zm208.59 133.589h-178.59v-133.59c0-24.813 20.187-45 45-45h88.59c24.813 0 45 20.187 45 45v133.59zm136.705-15c0 8.271-6.729 15-15 15h-91.705v-133.59a75.32 75.32 0 0 0-.182-4.957 44.899 44.899 0 0 1 11.769-1.572H437c24.813 0 45 20.187 45 45v80.119z"
+        data-original="#000000" />
+      <path
+        d="M100.06 126.504c-36.749 0-66.646 29.897-66.646 66.646-.001 36.749 29.897 66.646 66.646 66.646 36.748 0 66.646-29.897 66.646-66.646s-29.897-66.646-66.646-66.646zm-.001 103.292c-20.207 0-36.646-16.439-36.646-36.646s16.439-36.646 36.646-36.646 36.646 16.439 36.646 36.646-16.439 36.646-36.646 36.646zM256 43.729c-49.096 0-89.038 39.942-89.038 89.038s39.942 89.038 89.038 89.038 89.038-39.942 89.038-89.038c0-49.095-39.942-89.038-89.038-89.038zm0 148.076c-32.554 0-59.038-26.484-59.038-59.038 0-32.553 26.484-59.038 59.038-59.038s59.038 26.484 59.038 59.038c0 32.554-26.484 59.038-59.038 59.038zm155.94-65.301c-36.748 0-66.646 29.897-66.646 66.646.001 36.749 29.898 66.646 66.646 66.646 36.749 0 66.646-29.897 66.646-66.646s-29.897-66.646-66.646-66.646zm0 103.292c-20.206 0-36.646-16.439-36.646-36.646.001-20.207 16.44-36.646 36.646-36.646 20.207 0 36.646 16.439 36.646 36.646s-16.439 36.646-36.646 36.646z"
+        data-original="#000000" />
+    </svg>&nbsp;My Courses</h4>
 
-              <button type="button" onclick="DOTheQuiz('{{this.quiz_id}}');"
-                class="mt-5 px-5 py-2.5 rounded-full text-white text-sm tracking-wider font-medium border border-current outline-none bg-blue-700 hover:bg-blue-800 active:bg-blue-700">Start
-                this quiz</button>
-
-            </div>
-          </div>
-        </div>
+  {{!-- end filter date controll --}}
+  {{!-- program lists --}}
+  <div class="bg-gray-100 min-h-screen p-4 font-sans">
+    <div class="max-w-4xl max-lg:max-w-2xl max-sm:max-w-sm mx-auto">
+      <div id="comboboxprogram_content" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-2">
+        {{!-- Start sub items --}}
+        {{!-- ------- --}}
+        {{!-- end sub items --}}
       </div>
     </div>
   </div>
-  {{/if}}
-  {{/each}}
-
-  {{!-- end quiz area --}}
+  {{!-- end program lists --}}
   <!-- End Body -->
 </main>
 
@@ -70,7 +49,7 @@
 <div id="toast_wrapper" style="display: none;"
   class="fixed inset-0 flex items-center justify-center bg-gray-800/50 z-50">
   <div id="toast_success"
-    class="w-[310px] bg-white text-center shadow-lg border-l-4 border-green-500 text-gray-800 flex items-center p-4 rounded-md">
+    class="w-[310px] bg-white text-center shadow-lg border-l-4 border-gray-500 text-gray-800 flex items-center p-4 rounded-md">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner-6 w-10 h-10 shrink-0 animate-spin"
       viewBox="0 0 512.004 512.004">
       <path
@@ -83,7 +62,7 @@
     &nbsp;&nbsp;
     <span class="text-center font-semibold tracking-wide">Update successfully</span>
     &nbsp;&nbsp;
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] mr-3 fill-green-500" viewBox="0 0 512 512">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] mr-3 fill-gray-500" viewBox="0 0 512 512">
       <ellipse cx="246" cy="246" rx="246" ry="246" />
       <path class="fill-white"
         d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z" />
@@ -106,7 +85,7 @@
         data-original="#000000" />
     </svg>
     &nbsp;&nbsp;
-    <span class="text-center font-semibold tracking-wide">Failure update the user information!!</span>
+    <span class="text-center font-semibold tracking-wide">Failure update the program information!!</span>
     &nbsp;&nbsp;
     <svg xmlns="http://www.w3.org/2000/svg" class="w-[32px] shrink-0 fill-red-500 inline mr-3" viewBox="0 0 32 32">
       <path
@@ -123,9 +102,9 @@
   class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
   <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-8 relative">
     <div class="flex items-center">
-      <h3 class="text-blue-600 text-xl font-bold flex-1">CREATE NEW QUIZ</h3>
+      <h3 class="text-gray-600 text-xl font-bold flex-1"></h3>
       <svg xmlns="http://www.w3.org/2000/svg" class="w-3 ml-2 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500"
-        viewBox="0 0 320.591 320.591" onclick="closeModalUpdate();">
+        viewBox="0 0 320.591 320.591">
         <path
           d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
           data-original="#000000"></path>
@@ -137,68 +116,49 @@
 
     <form class="space-y-4 mt-8">
       <div>
-        <label class="text-gray-800 text-sm mb-2 block">Course Name</label>
-        <select id="courseLists"></select>
-      </div>
-      <div>
-        <labe class="text-gray-800 text-sm mb-2 block">Quiz Title</labe>
-        <input type="text" id="quizTitle" placeholder="Enter title"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg" />
+        <label class="text-gray-800 text-sm mb-2 block">Program Name </label>
+        <input type="text" id="program_name" placeholder="Enter program name"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-600 focus:bg-transparent rounded-lg" />
       </div>
 
       <div>
-        <label class="text-gray-800 text-sm mb-2 block">Description</label>
-        <input id="quizdescription" placeholder="Enter description"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
-          required />
+        <label class="text-gray-800 text-sm mb-2 block">Program Description</label>
+        <input type="text" id="description" placeholder="Enter description"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-600 focus:bg-transparent rounded-lg" />
       </div>
 
-      <div class="flex flex-col space-y-4">
-        <!-- Date Time Picker Label -->
-        <label for="datetime" class="text-sm font-semibold text-gray-700">Select Start Date and Time</label>
-
-        <!-- Date Time Picker Input -->
-        <input type="datetime-local" id="start_time" name="datetime"
-          class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-          required />
-      </div>
-      <div class="flex flex-col space-y-4">
-        <!-- Date Time Picker Label -->
-        <label for="end_time" class="text-sm font-semibold text-gray-700">Select End Date and Time</label>
-
-        <!-- Date Time Picker Input -->
-        <input type="datetime-local" id="end_time" name="end_time"
-          class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      <div>
+        <label class="text-gray-800 text-sm mb-2 block">Total credit</label>
+        <input id="total_credits" type="number" placeholder="Enter total credits"
+          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-gray-600 focus:bg-transparent rounded-lg"
           required />
       </div>
 
       <div>
-        <label class="text-gray-800 text-sm mb-2 block">Duration</label>
-        <input type="number" id="totaltime" placeholder="Enter title"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg" />
+        <label class="text-gray-800 text-sm mb-2 block">start Date</label>
+        {{!-- start --}}
+        <div>
+          <input type="date" id="start_date"
+            class="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm outline-[#007bff] rounded" />
+        </div>
+        {{!-- end --}}
       </div>
+
       <div>
-        <label class="text-gray-800 text-sm mb-2 block">Total Point</label>
-        <input type="number" id="totalpoint" placeholder="Enter title"
-          class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg" />
-      </div>
-      <div>
-        <labe class="text-gray-800 text-sm mb-2 block">Published Time</labe>
-        <select id="published">
-          <option value="1">
-            Now
-          </option>
-          <option value="0">
-            Later
-          </option>
-        </select>
+        <label class="text-gray-800 text-sm mb-2 block">End Date</label>
+        {{!-- start --}}
+        <div>
+          <input type="date" id="end_date"
+            class="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm outline-[#007bff] rounded" />
+        </div>
+        {{!-- end --}}
       </div>
 
       <div class="flex justify-end gap-4 !mt-8">
         <button type="button" onclick="closeModalUpdate()"
           class="px-6 py-3 rounded-lg text-gray-800 text-sm border-none outline-none tracking-wide bg-gray-200 hover:bg-gray-300">Cancel</button>
-        <button type="button" onclick="CallBackendMakequiz()"
-          class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue-600 hover:bg-blue-700">Create</button>
+        <button type="button" onclick="CallBackendUpdate()"
+          class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-gray-600 hover:bg-gray-700">Submit</button>
       </div>
     </form>
   </div>
@@ -219,27 +179,70 @@
     </svg>
 
     <div class="my-4 text-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-14 fill-red-500 inline" viewBox="0 0 24 24">
-        <path
-          d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-          data-original="#000000" />
-        <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-          data-original="#000000" />
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#007bff" class="w-8 mb-6 inline-block"
+        viewBox="0 0 682.667 682.667">
+        <defs>
+          <clipPath id="a" clipPathUnits="userSpaceOnUse">
+            <path d="M0 512h512V0H0Z" data-original="#000000" />
+          </clipPath>
+        </defs>
+        <g fill="none" stroke="#007bff" stroke-miterlimit="10" stroke-width="30" clip-path="url(#a)"
+          transform="matrix(1.33 0 0 -1.33 0 682.667)">
+          <path
+            d="M226 15v60c0 16.568-13.432 30-30 30H76c-16.568 0-30-13.432-30-30V15Zm-45 165c0-24.853-20.147-45-45-45s-45 20.147-45 45 20.147 45 45 45 45-20.147 45-45ZM466 15v60c0 16.568-13.432 30-30 30H316c-16.568 0-30-13.432-30-30V15Zm-45 165c0-24.853-20.147-45-45-45s-45 20.147-45 45 20.147 45 45 45 45-20.147 45-45Zm-75 167v-50.294L286 347h-60.002L166 296.706V347h-15c-41.421 0-75 33.579-75 75s33.579 75 75 75h210c41.421 0 75-33.579 75-75s-33.579-75-75-75Zm-105 75h30m-90 0h30m90 0h30"
+            data-original="#000000" />
+        </g>
       </svg>
-      <h4 class="text-gray-800 text-base font-semibold mt-4">Are you sure you want to delete it?</h4>
+      <h4 class="text-gray-800 text-base font-semibold mt-4">Which semester do you want to study "<span
+          id="title_program" class="text-gray-700"></span>" ?</h4>
+      <div>
+        <br>
+        <select id="enrollsemester" class="text-red-500">
+          <option value="1">Spring</option>
+          <option value="2">Summer</option>
+          <option value="3">Fall</option>
+          <option value="4">Winter</option>
+        </select>
+      </div>
 
       <div class="text-center space-x-4 mt-8">
         <input type="hidden" id="userfordeleted">
         <button type="button" onclick="closeModalDelete()"
           class="px-4 py-2 rounded-lg text-gray-800 text-sm bg-gray-200 hover:bg-gray-300 active:bg-gray-200">Cancel</button>
-        <button type="button" onclick="CallBackEndToDeleteInfo()"
-          class="px-4 py-2 rounded-lg text-white text-sm bg-red-600 hover:bg-red-700 active:bg-red-600">Delete</button>
+        <button type="button" onclick="CallBackendAddData()"
+          class="px-4 py-2 rounded-lg text-white text-sm bg-red-600 hover:bg-red-700 active:bg-red-600">Submit</button>
       </div>
     </div>
   </div>
 </div>
+{{!-- notification --}}
+<div id="validnotifcation" name="validnotifcation" style="display: none;"
+  class="bg-red-50 text-red-800 p-6 rounded-lg relative" role="alert">
+  <div class="mb-3 flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] cursor-pointer fill-red-500 inline mr-3 shrink-0"
+      viewBox="0 0 32 32">
+      <path
+        d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
+        data-original="#ea2d3f" />
+    </svg>
+    <strong class="font-bold text-sm mr-3">Error Message!</strong>
+  </div>
+  <span id="validnotifcation_messagecontent" name="validnotifcation_messagecontent"
+    class="block sm:inline text-sm"></span>
+
+  <svg id="btnclosemessagevalid" xmlns="http://www.w3.org/2000/svg"
+    class="w-3 cursor-pointer fill-red-500 absolute right-4 top-4" viewBox="0 0 320.591 320.591">
+    <path
+      d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+      data-original="#000000" />
+    <path
+      d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+      data-original="#000000" />
+  </svg>
+</div>
+{{!-- end notfication --}}
 
 <!-- end main body -->
 <!-- Include jQuery UI -->
-<script src="/js/startquiz.js"></script>
+<script src="/js/courseforquizzes.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

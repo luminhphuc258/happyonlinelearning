@@ -10,6 +10,7 @@ import { storeQuiz } from "../handlers/makingquizzes.js";
 import { addProgram } from "../handlers/studyprogram.js";
 import { addCourse } from "../handlers/courses.js";
 import { handleRequestToEnroll } from "../handlers/enrollments.js";
+import { handler_addSubmitQuiz } from "../handlers/quizattempts.js"
 
 // handle for adding new study program 
 router.post("/addnewstudyprogram", addProgram);
@@ -31,6 +32,10 @@ router.post("/storeQuestion", storeQuestion);
 
 // hander for add quiz
 router.post("/storeQuiz", storeQuiz);
+
+// hander for add quiz
+router.post("/studentsubmitQuiz", handler_addSubmitQuiz);
+
 
 // UPLOAD DOCUMENTS - PICTURES
 router.post("/uploaduserpicture", upload.single("userfile"), handleUploadPicture);

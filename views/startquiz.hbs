@@ -47,7 +47,7 @@
               <h3 class="text-blue-500">Total Point: {{this.total_points}}%</h3>
               <h5 class="mt-4">Only Available From: <b>{{this.start_time}}</b> To: <b>{{this.end_time}}</b> </h5>
 
-              <button type="button" onclick="DOTheQuiz('{{this.quiz_id}}');"
+              <button type="button" onclick="StartQuiz('{{this.quiz_id}}')"
                 class="mt-5 px-5 py-2.5 rounded-full text-white text-sm tracking-wider font-medium border border-current outline-none bg-blue-700 hover:bg-blue-800 active:bg-blue-700">Start
                 this quiz</button>
 
@@ -61,6 +61,7 @@
   {{/each}}
 
   {{!-- end quiz area --}}
+  <div id="leftboard" style="padding: 5px"></div>
   <!-- End Body -->
 </main>
 
@@ -241,5 +242,5 @@
 
 <!-- end main body -->
 <!-- Include jQuery UI -->
-<script src="/js/startquiz.js"></script>
+<script src="/js/quiz.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

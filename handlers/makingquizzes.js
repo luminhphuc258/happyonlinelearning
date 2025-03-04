@@ -157,5 +157,51 @@ export const fetchAllQuizzes = async (req, res) => {
 };
 
 
+// Method to fetch all quizzes with their details
+export const fetchAllQuizzesByCourseID = async (CourseID) => {
+  try {
+    // Fetch all quizzes with the necessary details
+    const quizzes = await Quiz.findAll({
+      where: { course_id: CourseID },
+      attributes: [
+        'quiz_id',        // Quiz ID
+        'title',          // Quiz title
+        'is_published',   // Whether the quiz is published
+        'start_time',     // Quiz start time
+        'end_time',       // Quiz end time
+        'total_points'    // Total points for the quiz
+      ]
+    });
+
+    console.log("Quizzes fetched:", quizzes);
+
+    // If no quizzes are found, return a 404 error
+    if (quizzes.length === 0) {
+      return null;
+    }
+
+    // Return quizzes in the response
+    return quizzes.map((quiz) => ({
+      quiz_id: quiz.quiz_id,
+      title: quiz.title,
+      is_published: quiz.is_published,
+      start_time: quiz.start_time,
+      end_time: quiz.end_time,
+      total_points: quiz.total_points
+    }));
+
+  } catch (error) {
+    console.log('Error fetching quizzes:', error);
+
+    // Handle cases where `res` might not be available
+    if (res) {
+      return null;
+    } else {
+      console.error('Response object is missing, unable to send response');
+    }
+  }
+};
+
+
 
 

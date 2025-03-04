@@ -14,7 +14,6 @@ export const storeQuestion = async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields' });
   }
   try {
-    console.log("ALO 9999:", quizid);
     // Fetch the Excel file from the URL
     const response = await axios.get(file_path, { responseType: 'arraybuffer' });
     const data = response.data;
@@ -113,9 +112,11 @@ export const fetchAllQuestions = async (QuizIDInput) => {
 
     // Map the data to an array of objects with required fields
     let formattedQuestions = [];
+    let index = 1;
     for (const question of questions) {
       formattedQuestions.push({
         id: question.id,
+        index: index,
         quiz_id: question.quizid,
         content: question.content,
         option1: question.option1,
@@ -123,8 +124,10 @@ export const fetchAllQuestions = async (QuizIDInput) => {
         option3: question.option3,
         option4: question.option4,
         answer: question.answer,
+        images: question.images,
         score: question.score
       });
+      index++;
     }
     return formattedQuestions;
   } catch (error) {

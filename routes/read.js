@@ -6,8 +6,9 @@ import { fetchAllUsers } from "../handlers/register.js";
 import { fetchAllPrograms } from "../handlers/studyprogram.js";
 import { fetchAllCourse } from "../handlers/courses.js";
 import { fetchAllAssignmentForInstructor } from "../handlers/gradingstudents.js"
-import { fetchAllQuizzes } from '../handlers/makingquizzes.js';
+import { fetchAllQuizzes, fetchAllQuizzesByCourseID } from '../handlers/makingquizzes.js';
 import { fetchAllmyCourses, fetchAllAssignment, HandleAssignmentSubmission, checkAssignmentStatus } from "../handlers/assignments.js";
+import { create_StudentTrackingGraph } from '../handlers/student_trackinggrade.js';
 // ==========================================ROUTER ZONE ============================================
 const router = express.Router();
 
@@ -18,6 +19,18 @@ router.get('/oauth2callback', async (req, res) => {
   oauth2Client.setCredentials(tokens);
   req.session.emailtoken = tokens;
   // Store these tokens securely for sending emails later
+});
+
+// =============TRACKING STUDENT ====================================================================
+router.get('/student-tracking', create_StudentTrackingGraph);
+
+// get tracking page
+router.get('/gettrackingpageforstudents', async (req, res) => {
+  if (req.session.isLoggined) {
+    res.render('student_tracking', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
 });
 
 //============================================ PROGRAM MANAGEMENT ====================================
@@ -329,6 +342,39 @@ router.get('/getenrollmentpage', async (req, res) => {
 
 // ========================================== QUIZZES
 
+// get courses that prepare to take quiz
+router.get('/getquizepageforstudent', async (req, res) => {
+  if (req.session.isLoggined) {
+    const listquizzes = await fetchAllQuizzes();
+    res.render('courseforquizzes', { quizzes: listquizzes, username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+// getquizzlistforstudents
+router.post('/getquizzlistforstudents', async (req, res) => {
+  if (req.session.isLoggined) {
+    const listquizzes = await fetchAllQuizzesByCourseID(req.body.course_id);
+    console.log("===========/getquizzlistforstudents=========");
+    console.log(listquizzes);
+    req.session.getquizzlistforstudents = listquizzes;
+    res.status(200).json({ status: "success" });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+router.get('/getquizzlistpage', async (req, res) => {
+  if (req.session.isLoggined) {
+    res.render('quiz', { quizzes: req.session.getquizzlistforstudents, username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+
+
 // get all quizzes 
 router.get('/fetchOurAllQuizzes', async (req, res) => {
   if (req.session.isLoggined) {
@@ -394,8 +440,35 @@ router.get('/quizAttempts', (req, res) => {
   }
 });
 
+//=====================   START QUIZZES
+// get add new question page
+router.post('/getLoadingQuestionsByQuizID', async (req, res) => {
+  console.log(req.body);
+  if (req.session.isLoggined) {
+    const listquestions = await fetchAllQuestions(req.body.quizId);
+    console.log("===========here data return question=========");
+    console.log(listquestions);
+    if (listquestions) {
+      req.session.loadingdatalistquestions = listquestions;
+    } else {
+      req.session.datalistquestions = null;
+    }
+    return res.status(200).json({ status: "success" });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
 
 
 
+// // get all questions
+router.get('/getLoadingQuestionsByQuizID', async (req, res) => {
+  if (req.session.isLoggined && req.session.loadingdatalistquestions) {
+    console.log("===========here data return=========");
+    res.render('takequizzes', { questions: req.session.loadingdatalistquestions, username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
 
 export default router;

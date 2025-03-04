@@ -6,6 +6,7 @@ import { fetchAllUsers } from "../handlers/register.js";
 import { fetchAllPrograms } from "../handlers/studyprogram.js";
 import { fetchAllCourse } from "../handlers/courses.js";
 import { fetchAllAssignmentForInstructor } from "../handlers/gradingstudents.js"
+import { fetchAllQuizzes } from '../handlers/makingquizzes.js';
 import { fetchAllmyCourses, fetchAllAssignment, HandleAssignmentSubmission, checkAssignmentStatus } from "../handlers/assignments.js";
 // ==========================================ROUTER ZONE ============================================
 const router = express.Router();
@@ -326,14 +327,47 @@ router.get('/getenrollmentpage', async (req, res) => {
 
 
 
-// ========================================== QUIZZES 
-// get all questions
-router.get('/getallquestions', async (req, res) => {
+// ========================================== QUIZZES
+
+// get all quizzes 
+router.get('/fetchOurAllQuizzes', async (req, res) => {
   if (req.session.isLoggined) {
-    const listquestions = await fetchAllQuestions();
+    const listquizzes = await fetchAllQuizzes();
+    console.log("===========here data return quizzes=========");
+    console.log(listquizzes);
+    res.render('quizmanagement', { quizzes: listquizzes, username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+// get add new question page
+router.post('/getallquestions', async (req, res) => {
+  console.log(req.body);
+  if (req.session.isLoggined) {
+    const listquestions = await fetchAllQuestions(req.body.quizId);
+    console.log("===========here data return question=========");
+    console.log(listquestions);
+    if (listquestions) {
+      req.session.datalistquestions = listquestions;
+    } else {
+      req.session.datalistquestions = null;
+    }
+    return res.status(200).json({ status: "success" });
+  } else {
+    res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
+  }
+});
+
+
+
+// // get all questions
+router.get('/getallquestions', async (req, res) => {
+  if (req.session.isLoggined && req.session.datalistquestions) {
+
     console.log("===========here data return=========");
     // console.log(listquestions);
-    res.render('index', { username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
+    res.render('questionmanagement', { questions: req.session.datalistquestions, username: req.session.username, isLoggined: true, userRole: req.session.role, fullName: req.session.fullname, email: req.session.email, useravatar: req.session.picture });
   } else {
     res.render('login', { username: '', isLoggined: false, userRole: '', fullName: '', email: '', useravatar: '' });
   }

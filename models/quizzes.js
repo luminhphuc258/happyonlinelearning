@@ -36,9 +36,9 @@ const Quiz = sequelize.define('quizzes', {
     allowNull: false
   },
   is_published: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.TINYINT(1),
     allowNull: false,
-    defaultValue: false
+    defaultValue: 0
   }
 }, {
   timestamps: false

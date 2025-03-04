@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/connection.js';
+import Quiz from '../models/quizzes.js';
 
 const QuestionsSchema = sequelize.define('questions', {
   id: {
@@ -52,13 +53,19 @@ const QuestionsSchema = sequelize.define('questions', {
   timestamps: false
 });
 
+// Question belongs to Quiz
+QuestionsSchema.belongsTo(Quiz, {
+  foreignKey: 'quizid',
+  targetKey: 'quiz_id'
+});
+
 // this creates the table if it doesn't already exist.
 QuestionsSchema.sync()
   .then(() => {
     console.log("Questions table created if it didn't already exist.");
   })
   .catch((error) => {
-    console.error("Error creating BlogPost table:", error);
+    console.error("Error creating Questions table:", error);
   });
 
 export default QuestionsSchema;

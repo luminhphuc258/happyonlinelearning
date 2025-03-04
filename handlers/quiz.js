@@ -1,25 +1,63 @@
 import QuestionsSchema from '../models/questions.js';
+import axios from 'axios';
+import * as XLSX from 'xlsx';
+
+
 // Method to create a new question
 export const storeQuestion = async (req, res) => {
-  // try {
   console.log("Calling to add new questions");
   console.log(req.body);
-
-  const { content, option1, option2, option3, option4, answer, questiontype, score, quizid, images } = req.body;
+  const { file_path, quizid } = req.body;
 
   // Validate required fields
-  if (!content || !option1 || !option2 || !option3 || !option4 || !answer || !questiontype || !quizid) {
+  if (!file_path || !quizid) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
+  try {
+    console.log("ALO 9999:", quizid);
+    // Fetch the Excel file from the URL
+    const response = await axios.get(file_path, { responseType: 'arraybuffer' });
+    const data = response.data;
 
-  // Create a new question record
-  const newQuestion = await QuestionsSchema.create({ content, option1, option2, option3, option4, answer, questiontype, score, quizid, images });
+    // Parse the Excel data
+    const workbook = XLSX.read(data, { type: 'buffer' });
 
-  return res.status(201).json(newQuestion);
-  // } catch (error) {
-  //   console.error('Error storing question:', error);
-  //   return res.status(500).json({ error: 'Failed to create question.' });
-  // }
+    // Get the first sheet from the Excel file
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+
+    // Convert the sheet to JSON format (array of objects)
+    const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+    // Format the data for Node.js route
+    const formattedData = jsonData.map(item => ({
+      content: item.content,
+      answer: item.answer,
+      option1: item.option1,
+      option2: item.option2,
+      option3: item.option3,
+      option4: item.option4,
+      score: item.score,
+      quizid: quizid,
+      questiontype: 0,
+      images: item.imagepath
+      // image_path: item['imagepath']
+    }));
+    console.log("checkpoint excel data:", formattedData);
+    if (formattedData.length > 0) {
+      // add questions to database
+      const result = await QuestionsSchema.bulkCreate(formattedData);
+      console.log(`Successfully inserted ${result.length} questions.`);
+      return res.status(200).json({ status: "success" });
+
+    } else {
+      return res.status(500).json({ error: 'Cannot convert data to insert questions.' });
+    }
+  } catch (error) {
+    console.error('Error fetching or parsing Excel file:', error);
+    return res.status(500).json({ error: 'Failed to insert question.' });
+  }
+
 };
 
 // Method to update an existing question
@@ -60,16 +98,26 @@ export const updateQuestion = async (req, res) => {
 
 // fetch all questions 
 // Method to fetch all questions
-export const fetchAllQuestions = async (req, res) => {
+export const fetchAllQuestions = async (QuizIDInput) => {
+  console.log(" ============= Calling to get questions data =================");
+  console.log(QuizIDInput);
   try {
-    console.log(" ============= Calling to get questions data =================");
-    const questions = await QuestionsSchema.findAll();
+    if (!QuizIDInput) {
+      return res.status(404).json({ "message": "lack of inputs" });
+    }
+
+    const questions = await QuestionsSchema.findAll({
+      where: { quizid: QuizIDInput }
+    });
+    console.log(questions);
+
     // Map the data to an array of objects with required fields
     let formattedQuestions = [];
     for (const question of questions) {
       formattedQuestions.push({
-        questionNumber: question.id,
-        questionContent: question.content,
+        id: question.id,
+        quiz_id: question.quizid,
+        content: question.content,
         option1: question.option1,
         option2: question.option2,
         option3: question.option3,
@@ -132,10 +180,10 @@ export const deleteQuestion = async (req, res) => {
     console.log("Calling delete question!");
     console.log(req.body);
 
-    const { id } = req.body;
+    const { quizID } = req.body;
 
     // Find the question by primary key
-    const question = await QuestionsSchema.findByPk(id);
+    const question = await QuestionsSchema.findByPk(quizID);
     if (!question) {
       return res.status(404).json({ error: 'Question not found.' });
     }
@@ -143,9 +191,18 @@ export const deleteQuestion = async (req, res) => {
     // Delete the question
     await question.destroy();
 
-    return res.status(200).json({ message: 'Question deleted successfully.' });
+    // update session data for list questions
+    await fetchAllQuestions(quizID);
+
+    return res.status(200).json({ status: 'success' });
   } catch (error) {
     console.error('Error deleting question:', error);
     return res.status(500).json({ error: 'Failed to delete question.' });
   }
 };
+
+
+
+
+
+
